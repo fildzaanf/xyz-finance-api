@@ -9,6 +9,7 @@ import (
 type (
 	LoanResponse struct {
 		ID             string    `json:"id"`
+		UserID         string    `json:"user_id"`
 		Tenor          int       `json:"tenor"`
 		LimitAmount    int       `json:"limit_amount"`
 		UsedAmount     int       `json:"used_amount"`
@@ -22,6 +23,7 @@ type (
 func LoanDomainToLoanResponse(response domain.Loan) LoanResponse {
 	return LoanResponse{
 		ID:             response.ID,
+		UserID:         response.UserID,
 		Tenor:          response.Tenor,
 		LimitAmount:    response.LimitAmount,
 		UsedAmount:     response.UsedAmount,
@@ -39,5 +41,3 @@ func ListLoanDomainToLoanResponse(loans []domain.Loan) []LoanResponse {
 	}
 	return loanResponses
 }
-
-
