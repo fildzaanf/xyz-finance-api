@@ -3,7 +3,7 @@ package entity
 import (
 	"time"
 	el "xyz-finance-api/internal/loan/entity"
-	ep "xyz-finance-api/internal/payment/entity"
+	// ep "xyz-finance-api/internal/payment/entity"
 )
 
 type Transaction struct {
@@ -18,5 +18,5 @@ type Transaction struct {
 	CreatedAt         time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP"`
 	UpdatedAt         time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"`
 	Loan              el.Loan      `gorm:"foreignKey:LoanID"`
-	Payments          []ep.Payment `gorm:"foreignKey:TransactionID"`
+	// Payments          []ep.Payment `gorm:"foreignKey:TransactionID"`
 }
