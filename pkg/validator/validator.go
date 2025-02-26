@@ -127,19 +127,18 @@ func CalculateUsedAmount(payments []domain.Payment) int {
 }
 
 func CalculateLoanLimit(salary int, tenor int) int {
-	
+
 	limitMultiplier := map[int]float64{
-		1:  0.5,  // 50% salary
-		2:  0.7,  // 70% salary
-		3:  0.9,  // 90% salary
-		6:  1.2,  // 120% salary
+		1: 0.5, // 50% salary
+		2: 0.7, // 70% salary
+		3: 0.9, // 90% salary
+		6: 1.2, // 120% salary
 	}
 
 	multiplier, exists := limitMultiplier[tenor]
 	if !exists {
-		multiplier = 0.5 
+		multiplier = 0.5
 	}
 
 	return int(float64(salary) * multiplier)
 }
-
