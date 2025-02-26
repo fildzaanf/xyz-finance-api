@@ -9,6 +9,7 @@ import (
 type Transaction struct {
 	ID                string    `gorm:"type:varchar(36);primaryKey"`
 	LoanID            string    `gorm:"type:varchar(36);not null"`
+	AssetName         string    `gorm:"type:varchar(100);not null"`
 	TotalAmount       int       `gorm:"not null"`
 	OTRPrice          int       `gorm:"not null"`
 	AdminFee          int       `gorm:"not null"`
@@ -17,6 +18,6 @@ type Transaction struct {
 	Status            string    `gorm:"type:varchar(50);not null"`
 	CreatedAt         time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP"`
 	UpdatedAt         time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"`
-	Loan              el.Loan      `gorm:"foreignKey:LoanID"`
+	Loan              el.Loan   `gorm:"foreignKey:LoanID"`
 	// Payments          []ep.Payment `gorm:"foreignKey:TransactionID"`
 }

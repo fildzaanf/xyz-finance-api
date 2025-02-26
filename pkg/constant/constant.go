@@ -2,20 +2,21 @@ package constant
 
 // Roles
 const (
-	USER    = "user"
+	USER = "user"
 )
 
 // Success
 const (
-	SUCCESS_LOGIN             = "logged in successfully"
-	SUCCESS_REGISTER          = "register successfully"
-	SUCCESS_CREATED           = "data created successfully"
-	SUCCESS_RETRIEVED         = "data retrieved successfully"
-	SUCCESS_UPDATED           = "data updated successfully"
-	SUCCESS_PASSWORD_UPDATED  = "password updated successfully"
-	SUCCESS_OTP_SENT          = "otp sent successfully"
-	SUCCESS_OTP_VERIFIED      = "otp verification successfully"
-	SUCCESS_VERIFICATION      = "verification successfully"
+	SUCCESS_LOGIN               = "logged in successfully"
+	SUCCESS_REGISTER            = "register successfully"
+	SUCCESS_CREATED             = "data created successfully"
+	SUCCESS_RETRIEVED           = "data retrieved successfully"
+	SUCCESS_UPDATED             = "data updated successfully"
+	SUCCESS_PASSWORD_UPDATED    = "password updated successfully"
+	SUCCESS_OTP_SENT            = "otp sent successfully"
+	SUCCESS_OTP_VERIFIED        = "otp verification successfully"
+	SUCCESS_VERIFICATION        = "verification successfully"
+	SUCCESS_CREATED_TRANSACTION = "Transaction created successfully"
 )
 
 // Error
@@ -59,5 +60,5 @@ const (
 	ERROR_ROLE_ACCESS          = "not authorized to access this resource"
 	ERROR_STATUS_INVALID       = "invalid status"
 	ERROR_UPLOAD_IMAGE         = "failed to upload profile picture"
-	ERROR_UPLOAD_IMAGE_S3 	   = "failed to upload profile picture to s3"
+	ERROR_UPLOAD_IMAGE_S3      = "failed to upload profile picture to s3"
 )
