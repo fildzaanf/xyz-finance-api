@@ -5,6 +5,7 @@ import (
 	"time"
 	"xyz-finance-api/internal/transaction/domain"
 	"xyz-finance-api/internal/transaction/repository"
+	repositoryLoan "xyz-finance-api/internal/loan/repository"
 	"xyz-finance-api/pkg/constant"
 	"xyz-finance-api/pkg/validator"
 )
@@ -12,16 +13,18 @@ import (
 type transactionCommandUsecase struct {
 	transactionCommandRepository repository.TransactionCommandRepositoryInterface
 	transactionQueryRepository   repository.TransactionQueryRepositoryInterface
+	loanQueryRepository repositoryLoan.LoanQueryRepositoryInterface
 }
 
-func NewTransactionCommandUsecase(tcr repository.TransactionCommandRepositoryInterface, tqr repository.TransactionQueryRepositoryInterface) TransactionCommandUsecaseInterface {
+func NewTransactionCommandUsecase(tcr repository.TransactionCommandRepositoryInterface, tqr repository.TransactionQueryRepositoryInterface, lqr repositoryLoan.LoanQueryRepositoryInterface) TransactionCommandUsecaseInterface {
 	return &transactionCommandUsecase{
 		transactionCommandRepository: tcr,
 		transactionQueryRepository:   tqr,
+		loanQueryRepository: lqr,
 	}
 }
 
-func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Transaction) (domain.Transaction, error) {
+func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Transaction, userID string) (domain.Transaction, error) {
 
 	errEmpty := validator.IsDataEmpty([]string{"loan_id", "asset_name", "otr_price"}, transaction.LoanID, transaction.AssetName, transaction.OTRPrice)
 	if errEmpty != nil {
@@ -31,6 +34,10 @@ func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Trans
 	loan, errLoan := tcs.transactionQueryRepository.GetLoanByID(transaction.LoanID)
 	if errLoan != nil {
 		return domain.Transaction{}, errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+
+	if loan.UserID != userID {
+		return domain.Transaction{}, errors.New(constant.ERROR_ROLE_ACCESS)
 	}
 
 	interestRate := 0.1
