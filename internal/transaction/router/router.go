@@ -15,9 +15,10 @@ func TransactionRoutes(transaction *echo.Group, db *gorm.DB) {
 	transactionQueryRepository := repository.NewTransactionQueryRepository(db)
 	transactionCommandRepository := repository.NewTransactionCommandRepository(db)
 	loanQueryRepository := repositoryLoan.NewLoanQueryRepository(db)
+	loanCommandRepository := repositoryLoan.NewLoanCommandRepository(db)
 
 	transactionQueryUsecase := usecase.NewTransactionQueryUsecase(transactionCommandRepository, transactionQueryRepository)
-	transactionCommandUsecase := usecase.NewTransactionCommandUsecase(transactionCommandRepository, transactionQueryRepository, loanQueryRepository)
+	transactionCommandUsecase := usecase.NewTransactionCommandUsecase(transactionCommandRepository, transactionQueryRepository, loanQueryRepository, loanCommandRepository)
 
 	transactionHandler := handler.NewTransactionHandler(transactionCommandUsecase, transactionQueryUsecase)
 

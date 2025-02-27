@@ -17,16 +17,16 @@ type (
 // response
 type (
 	TransactionResponse struct {
-		ID                string    `json:"id"`
-		LoanID            string    `json:"loan_id"`
-		AssetName         string    `json:"asset_name"`
-		TotalAmount       int       `json:"total_amount"`
-		OTRPrice          int       `json:"otr_price"`
-		AdminFee          int       `json:"admin_fee"`
-		Interest          int       `json:"interest"`
-		InstallmentAmount int       `json:"installment_amount"`
-		Status            string    `json:"status"`
-		CreatedAt         time.Time `json:"created_at"`
+		ID          string    `json:"id"`
+		LoanID      string    `json:"loan_id"`
+		AssetName   string    `json:"asset_name"`
+		TotalAmount int       `json:"total_amount"`
+		Tenor       int       `json:"tenor"`
+		OTRPrice    int       `json:"otr_price"`
+		AdminFee    int       `json:"admin_fee"`
+		Interest    int       `json:"interest"`
+		Status      string    `json:"status"`
+		CreatedAt   time.Time `json:"created_at"`
 	}
 )
 
@@ -42,15 +42,15 @@ func TransactionRequestToTransactionDomain(request TransactionRequest) domain.Tr
 // mapper - response
 func TransactionDomainToTransactionResponse(response domain.Transaction) TransactionResponse {
 	return TransactionResponse{
-		ID:                response.ID,
-		LoanID:            response.LoanID,
-		AssetName:         response.AssetName,
-		TotalAmount:       response.TotalAmount,
-		OTRPrice:          response.OTRPrice,
-		AdminFee:          response.AdminFee,
-		Interest:          response.Interest,
-		InstallmentAmount: response.InstallmentAmount,
-		Status:            response.Status,
-		CreatedAt:         response.CreatedAt,
+		ID:          response.ID,
+		LoanID:      response.LoanID,
+		AssetName:   response.AssetName,
+		TotalAmount: response.TotalAmount,
+		Tenor:       response.Tenor,
+		OTRPrice:    response.OTRPrice,
+		AdminFee:    response.AdminFee,
+		Interest:    response.Interest,
+		Status:      response.Status,
+		CreatedAt:   response.CreatedAt,
 	}
 }

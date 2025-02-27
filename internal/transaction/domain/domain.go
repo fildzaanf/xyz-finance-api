@@ -2,59 +2,50 @@ package domain
 
 import (
 	"time"
-	// el "xyz-finance-api/internal/loan/entity"
-	// dl "xyz-finance-api/internal/loan/domain"
-	// ep "xyz-finance-api/internal/payment/entity"
 	"xyz-finance-api/internal/transaction/entity"
 )
 
 type Transaction struct {
-	ID                string
-	LoanID            string
-	AssetName         string
-	TotalAmount       int
-	OTRPrice          int
-	AdminFee          int
-	Interest          int
-	InstallmentAmount int
-	Status            string
-	CreatedAt         time.Time
-	// Loan              el.Loan
-	// Payments          []ep.Payment `gorm:"foreignKey:TransactionID"`
+	ID          string
+	LoanID      string
+	AssetName   string
+	TotalAmount int
+	Tenor       int
+	OTRPrice    int
+	AdminFee    int
+	Interest    int
+	Status      string
+	CreatedAt   time.Time
 }
 
 // mapper
 func TransactionDomainToTransactionEntity(transactionDomain Transaction) entity.Transaction {
 	return entity.Transaction{
-		ID:                transactionDomain.ID,
-		LoanID:            transactionDomain.LoanID,
-		AssetName:         transactionDomain.AssetName,
-		TotalAmount:       transactionDomain.TotalAmount,
-		OTRPrice:          transactionDomain.OTRPrice,
-		AdminFee:          transactionDomain.AdminFee,
-		Interest:          transactionDomain.Interest,
-		InstallmentAmount: transactionDomain.InstallmentAmount,
-		Status:            transactionDomain.Status,
-		CreatedAt:         transactionDomain.CreatedAt,
-		// Loan:              dl.LoanDomainToLoanEntity(),
-		// Payments:          transactionDomain.Payments,
+		ID:          transactionDomain.ID,
+		LoanID:      transactionDomain.LoanID,
+		AssetName:   transactionDomain.AssetName,
+		TotalAmount: transactionDomain.TotalAmount,
+		Tenor:       transactionDomain.Tenor,
+		OTRPrice:    transactionDomain.OTRPrice,
+		AdminFee:    transactionDomain.AdminFee,
+		Interest:    transactionDomain.Interest,
+		Status:      transactionDomain.Status,
+		CreatedAt:   transactionDomain.CreatedAt,
 	}
 }
 
 func TransactionEntityToTransactionDomain(transactionEntity entity.Transaction) Transaction {
 	return Transaction{
-		ID:                transactionEntity.ID,
-		LoanID:            transactionEntity.LoanID,
-		AssetName:         transactionEntity.AssetName,
-		TotalAmount:       transactionEntity.TotalAmount,
-		OTRPrice:          transactionEntity.OTRPrice,
-		AdminFee:          transactionEntity.AdminFee,
-		Interest:          transactionEntity.Interest,
-		InstallmentAmount: transactionEntity.InstallmentAmount,
-		Status:            transactionEntity.Status,
-		CreatedAt:         transactionEntity.CreatedAt,
-		// Loan:              transactionEntity.Loan,
-		// Payments:          transactionEntity.Payments,
+		ID:          transactionEntity.ID,
+		LoanID:      transactionEntity.LoanID,
+		AssetName:   transactionEntity.AssetName,
+		TotalAmount: transactionEntity.TotalAmount,
+		Tenor:       transactionEntity.Tenor,
+		OTRPrice:    transactionEntity.OTRPrice,
+		AdminFee:    transactionEntity.AdminFee,
+		Interest:    transactionEntity.Interest,
+		Status:      transactionEntity.Status,
+		CreatedAt:   transactionEntity.CreatedAt,
 	}
 }
 
