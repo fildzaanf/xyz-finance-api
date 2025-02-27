@@ -17,10 +17,10 @@ func NewInstallmentQueryRepository(db *gorm.DB) InstallmentQueryRepositoryInterf
 	}
 }
 
-func (iqr *installmentQueryRepository) GetAllInstallments(transactionID string) ([]domain.Installment, error) {
+func (iqr *installmentQueryRepository) GetAllInstallments(userID, transactionID string) ([]domain.Installment, error) {
 	var installments []domain.Installment
 
-	result := iqr.db.Where("transaction_id = ?", transactionID).Find(&installments)
+	result := iqr.db.Where("user_id = ? AND transaction_id = ?", userID, transactionID).Find(&installments)
 	if result.Error != nil {
 		return nil, result.Error
 	}
@@ -31,6 +31,7 @@ func (iqr *installmentQueryRepository) GetAllInstallments(transactionID string) 
 
 	return installments, nil
 }
+
 
 func (iqr *installmentQueryRepository) GetInstallmentByID(id string) (domain.Installment, error) {
 	var installment domain.Installment
