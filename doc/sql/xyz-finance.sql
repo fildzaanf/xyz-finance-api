@@ -4,9 +4,9 @@ USE xyz_finance;
 
 CREATE TABLE Users (
     id VARCHAR(36) PRIMARY KEY,
-    email VARCHAR(50) NOT NULL,
+    email VARCHAR(50) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
-    nik VARCHAR(16) UNIQUE NOT NULL,
+    nik VARCHAR(16) NOT NULL UNIQUE,
     full_name VARCHAR(100) NOT NULL,
     legal_name VARCHAR(100) NOT NULL,
     birth_place VARCHAR(100) NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE Installments (
 CREATE TABLE Payments (
     id VARCHAR(36) PRIMARY KEY,
     installment_id VARCHAR(36) NOT NULL,
-    order_id VARCHAR(100) NOT NULL,
+    order_id VARCHAR(100) NOT NULL UNIQUE,
     payment_url VARCHAR(100) NOT NULL,
     payment_type VARCHAR(100) NOT NULL,
     amount DECIMAL(15,2) NOT NULL,
