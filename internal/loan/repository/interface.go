@@ -4,6 +4,7 @@ import "xyz-finance-api/internal/loan/domain"
 
 type LoanCommandRepositoryInterface interface {
 	CreateLoan(loan domain.Loan) (domain.Loan, error)
+	UpdateLoanStatusByID(id string, loan domain.Loan) (domain.Loan, error)
 }
 
 type LoanQueryRepositoryInterface interface {

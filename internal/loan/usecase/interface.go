@@ -6,6 +6,7 @@ import (
 
 type LoanCommandUsecaseInterface interface {
 	CreateLoan(loan domain.Loan) (domain.Loan, error)
+	UpdateLoanStatusByID(id string, loan domain.Loan) (domain.Loan, error)
 }
 
 type LoanQueryUsecaseInterface interface {
