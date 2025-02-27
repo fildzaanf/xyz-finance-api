@@ -5,6 +5,7 @@ import (
 	tr "xyz-finance-api/internal/transaction/router"
 	ur "xyz-finance-api/internal/user/router"
 	ir "xyz-finance-api/internal/installment/router"
+	pr "xyz-finance-api/internal/payment/router"
 	"xyz-finance-api/pkg/config"
 	"xyz-finance-api/pkg/database"
 	"xyz-finance-api/pkg/middleware"
@@ -27,6 +28,9 @@ func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 
 	installment := e.Group("/installments")
 	ir.InstallmentRoutes(installment, db)
+
+	payment := e.Group("/payments")
+	pr.PaymentRoutes(payment, db)
 
 }
 
