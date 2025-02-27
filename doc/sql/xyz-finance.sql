@@ -31,6 +31,8 @@ CREATE TABLE Transactions (
     id VARCHAR(36) PRIMARY KEY,
     loan_id VARCHAR(36) NOT NULL,
     total_amount DECIMAL(15,2) NOT NULL,
+    asset_name VARCHAR(200) NOT NULL,
+    tenor INTEGER NOT NULL,
     otr_price DECIMAL(15,2) NOT NULL,
     admin_fee DECIMAL(15,2) NOT NULL,
     interest DECIMAL(15,2) NOT NULL,
