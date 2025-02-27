@@ -11,8 +11,7 @@ type Loan struct {
 	UserID         string
 	Tenor          int
 	LimitAmount    int
-	UsedAmount     int
-	RemainingLimit int
+	Status         string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
 }
@@ -24,8 +23,7 @@ func LoanDomainToLoanEntity(loanDomain Loan) entity.Loan {
 		UserID:         loanDomain.UserID,
 		Tenor:          loanDomain.Tenor,
 		LimitAmount:    loanDomain.LimitAmount,
-		UsedAmount:     loanDomain.UsedAmount,
-		RemainingLimit: loanDomain.RemainingLimit,
+		Status:         entity.LoanStatus(loanDomain.Status),
 		CreatedAt:      loanDomain.CreatedAt,
 		UpdatedAt:      loanDomain.UpdatedAt,
 	}
@@ -37,8 +35,7 @@ func LoanEntityToLoanDomain(loanEntity entity.Loan) Loan {
 		UserID:         loanEntity.UserID,
 		Tenor:          loanEntity.Tenor,
 		LimitAmount:    loanEntity.LimitAmount,
-		UsedAmount:     loanEntity.UsedAmount,
-		RemainingLimit: loanEntity.RemainingLimit,
+		Status:         string(loanEntity.Status),
 		CreatedAt:      loanEntity.CreatedAt,
 		UpdatedAt:      loanEntity.UpdatedAt,
 	}

@@ -3,8 +3,10 @@ package repository
 import "xyz-finance-api/internal/loan/domain"
 
 type LoanCommandRepositoryInterface interface {
+	CreateLoan(loan domain.Loan) (domain.Loan, error)
 }
 
 type LoanQueryRepositoryInterface interface {
-	GetAllLoans() ([]domain.Loan, error)
+	GetAllLoans(userID string) ([]domain.Loan, error)
+	GetLoanByID(id string) (domain.Loan, error)
 }
