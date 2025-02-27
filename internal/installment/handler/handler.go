@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"xyz-finance-api/internal/installment/dto"
 	"xyz-finance-api/internal/installment/usecase"
+	"xyz-finance-api/internal/installment/domain"
 	"xyz-finance-api/pkg/constant"
 	"xyz-finance-api/pkg/middleware"
 	"xyz-finance-api/pkg/response"
@@ -74,13 +75,23 @@ func (ih *installmentHandler) GetAllInstallments(c echo.Context) error {
 		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
 	}
 
-	installments, err := ih.installmentQueryUsecase.GetAllInstallments(tokenUserID)
+	transactionID := c.QueryParam("transaction_id")
+
+	var installments []domain.Installment
+	var err error
+	if transactionID != "" {
+		installments, err = ih.installmentQueryUsecase.GetAllInstallments(tokenUserID, transactionID)
+	} else {
+		installments, err = ih.installmentQueryUsecase.GetAllInstallments(tokenUserID, "")
+	}
+
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
 	}
 
 	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, installments))
 }
+
 
 
 func (ih *installmentHandler) GetInstallmentByID(c echo.Context) error {

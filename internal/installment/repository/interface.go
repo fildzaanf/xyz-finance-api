@@ -8,6 +8,6 @@ type InstallmentCommandRepositoryInterface interface {
 }
 
 type InstallmentQueryRepositoryInterface interface {
-	GetAllInstallments(transactionID string) ([]domain.Installment, error)
+	GetAllInstallments(userID, transactionID string) ([]domain.Installment, error)
 	GetInstallmentByID(id string) (domain.Installment, error)
 }
