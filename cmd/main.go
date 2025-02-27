@@ -1,11 +1,13 @@
 package main
 
 import (
+	lr "xyz-finance-api/internal/loan/router"
+	tr "xyz-finance-api/internal/transaction/router"
+	ur "xyz-finance-api/internal/user/router"
+	ir "xyz-finance-api/internal/installment/router"
 	"xyz-finance-api/pkg/config"
 	"xyz-finance-api/pkg/database"
 	"xyz-finance-api/pkg/middleware"
-	ur "xyz-finance-api/internal/user/router"
-	lr "xyz-finance-api/internal/loan/router"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -19,6 +21,12 @@ func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 
 	loan := e.Group("/loans")
 	lr.LoanRoutes(loan, db)
+
+	transaction := e.Group("/transactions")
+	tr.TransactionRoutes(transaction, db)
+
+	installment := e.Group("/installments")
+	ir.InstallmentRoutes(installment, db)
 
 }
 
