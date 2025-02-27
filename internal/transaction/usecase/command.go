@@ -60,7 +60,7 @@ func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Trans
 	}
 
 	loan.Status = "invalid"
-	errUpdateLoan := tcs.loanCommandRepository.UpdateLoanByID(loan)
+	_, errUpdateLoan := tcs.loanCommandRepository.UpdateLoanStatusByID(loan.ID, loan)
 	if errUpdateLoan != nil {
 		return domain.Transaction{}, errUpdateLoan
 	}
