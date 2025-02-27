@@ -24,3 +24,4 @@ type Payment struct {
 
 	// Transaction Transaction `gorm:"foreignKey:TransactionID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 }
+

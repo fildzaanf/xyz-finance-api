@@ -1,0 +1,455 @@
+{
+	"info": {
+		"_postman_id": "f35714f8-3dfd-4469-95af-832d4428a254",
+		"name": "XYZ Finance API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32514382"
+	},
+	"item": [
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "fildza@example.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "securepassword123",
+									"type": "text"
+								},
+								{
+									"key": "confirm_password",
+									"value": "securepassword123",
+									"type": "text"
+								},
+								{
+									"key": "nik",
+									"value": "32101234567890125",
+									"type": "text"
+								},
+								{
+									"key": "full_name",
+									"value": "Hanisah Fildza Annafisah",
+									"type": "text"
+								},
+								{
+									"key": "legal_name",
+									"value": "Hanisah Fildza Annafisah",
+									"type": "text"
+								},
+								{
+									"key": "birth_place",
+									"value": "Bandung",
+									"type": "text"
+								},
+								{
+									"key": "birth_date",
+									"value": "2005-09-10",
+									"type": "text"
+								},
+								{
+									"key": "salary",
+									"value": "5000000",
+									"type": "text"
+								},
+								{
+									"key": "ktp_photo",
+									"type": "file",
+									"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+								},
+								{
+									"key": "selfie_photo",
+									"type": "file",
+									"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{local}}/users/register",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Register User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "email",
+											"value": "fildza@example.com",
+											"type": "text"
+										},
+										{
+											"key": "password",
+											"value": "securepassword123",
+											"type": "text"
+										},
+										{
+											"key": "confirm_password",
+											"value": "securepassword123",
+											"type": "text"
+										},
+										{
+											"key": "nik",
+											"value": "32101234567890125",
+											"type": "text"
+										},
+										{
+											"key": "full_name",
+											"value": "Hanisah Fildza Annafisah",
+											"type": "text"
+										},
+										{
+											"key": "legal_name",
+											"value": "Hanisah Fildza Annafisah",
+											"type": "text"
+										},
+										{
+											"key": "birth_place",
+											"value": "Bandung",
+											"type": "text"
+										},
+										{
+											"key": "birth_date",
+											"value": "2005-09-10",
+											"type": "text"
+										},
+										{
+											"key": "salary",
+											"value": "5000000",
+											"type": "text"
+										},
+										{
+											"key": "ktp_photo",
+											"type": "file",
+											"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+										},
+										{
+											"key": "selfie_photo",
+											"type": "file",
+											"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{local}}/users/register",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"register"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Feb 2025 00:40:25 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "116"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"register successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Login User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n{\n  \"email\": \"fildza@example.com\",\n  \"password\": \"securepassword123\"\n}\n\n\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/users/login",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Login User",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n{\n  \"email\": \"fildza@example.com\",\n  \"password\": \"securepassword123\"\n}\n\n\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{local}}/users/login",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Feb 2025 00:40:34 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "335"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"logged in successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDA2MTY4MzQsImlkIjoiMTY3YjkzMTQtODE1NS00MjI1LWFkMmEtMzc0YzA5YzA0MDMxIiwicm9sZSI6InVzZXIifQ.eyhouQrHD0vwwaWPrsk7aNB4Wzt6RxjWi-hlP7Oeix0\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDA2MTY4MzQsImlkIjoiMTY3YjkzMTQtODE1NS00MjI1LWFkMmEtMzc0YzA5YzA0MDMxIiwicm9sZSI6InVzZXIifQ.eyhouQrHD0vwwaWPrsk7aNB4Wzt6RxjWi-hlP7Oeix0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/users/:user_id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"users",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": "167b9314-8155-4225-ad2a-374c09c04031"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get User",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{local}}/users/:user_id",
+									"host": [
+										"{{local}}"
+									],
+									"path": [
+										"users",
+										":user_id"
+									],
+									"variable": [
+										{
+											"key": "user_id",
+											"value": "167b9314-8155-4225-ad2a-374c09c04031"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 26 Feb 2025 00:40:57 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "485"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\",\n        \"nik\": \"32101234567890125\",\n        \"full_name\": \"Hanisah Fildza Annafisah\",\n        \"legal_name\": \"Hanisah Fildza Annafisah\",\n        \"birth_place\": \"Bandung\",\n        \"birth_date\": \"2005-09-10\",\n        \"ktp_photo\": \"https://talkspace-pat.s3.amazonaws.com/8041b61b-a8c9-4e1c-b550-263fcfa0e5fb.jpg\",\n        \"selfie_photo\": \"https://talkspace-pat.s3.amazonaws.com/5dc045e4-ecbb-4e60-9e3c-ff7322463b2f.jpg\",\n        \"salary\": 5000000\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "Get Loans",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/loans/:user_id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"loans",
+								":user_id"
+							],
+							"variable": [
+								{
+									"key": "user_id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Transactions",
+			"item": [
+				{
+					"name": "Create Transaction",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"loan_id\":\"2\",\n  \"amount\": 5000000,\n  \"asset_name\": \"MacBook Pro M2\",\n  \"otr_price\": 18000000,\n  \"admin_fee\": 500000,\n  \"interest\": 1500000,\n  \"installment_amount\": 6500000\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/transactions",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Create Payments",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"transaction_id\": 1001,\n  \"amount_paid\": 6500000\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/payments",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

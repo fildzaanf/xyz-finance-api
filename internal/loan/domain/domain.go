@@ -11,22 +11,19 @@ type Loan struct {
 	UserID         string
 	Tenor          int
 	LimitAmount    int
-	UsedAmount     int
-	RemainingLimit int
+	Status         string
 	CreatedAt      time.Time
 	UpdatedAt      time.Time
-
-	
 }
 
 // mapper
 func LoanDomainToLoanEntity(loanDomain Loan) entity.Loan {
 	return entity.Loan{
 		ID:             loanDomain.ID,
+		UserID:         loanDomain.UserID,
 		Tenor:          loanDomain.Tenor,
 		LimitAmount:    loanDomain.LimitAmount,
-		UsedAmount:     loanDomain.UsedAmount,
-		RemainingLimit: loanDomain.RemainingLimit,
+		Status:         entity.LoanStatus(loanDomain.Status),
 		CreatedAt:      loanDomain.CreatedAt,
 		UpdatedAt:      loanDomain.UpdatedAt,
 	}
@@ -35,10 +32,10 @@ func LoanDomainToLoanEntity(loanDomain Loan) entity.Loan {
 func LoanEntityToLoanDomain(loanEntity entity.Loan) Loan {
 	return Loan{
 		ID:             loanEntity.ID,
+		UserID:         loanEntity.UserID,
 		Tenor:          loanEntity.Tenor,
 		LimitAmount:    loanEntity.LimitAmount,
-		UsedAmount:     loanEntity.UsedAmount,
-		RemainingLimit: loanEntity.RemainingLimit,
+		Status:         string(loanEntity.Status),
 		CreatedAt:      loanEntity.CreatedAt,
 		UpdatedAt:      loanEntity.UpdatedAt,
 	}
