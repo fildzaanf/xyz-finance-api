@@ -5,6 +5,7 @@ import (
 	"xyz-finance-api/pkg/database"
 	"xyz-finance-api/pkg/middleware"
 	ur "xyz-finance-api/internal/user/router"
+	lr "xyz-finance-api/internal/loan/router"
 
 	"github.com/joho/godotenv"
 	"github.com/labstack/echo/v4"
@@ -15,6 +16,10 @@ import (
 func SetupRoutes(e *echo.Echo, db *gorm.DB) {
 	user := e.Group("/users")
 	ur.UserRoutes(user, db)
+
+	loan := e.Group("/loans")
+	lr.LoanRoutes(loan, db)
+
 }
 
 func main() {
@@ -43,7 +48,7 @@ func main() {
 		host = "127.0.0.1"
 	}
 	if port == "" {
-		port = "8001"
+		port = "8000"
 	}
 	address := host + ":" + port
 

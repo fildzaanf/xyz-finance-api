@@ -1,9 +1,11 @@
 package repository
 
 import (
-	"gorm.io/gorm"
+	"errors"
 	"xyz-finance-api/internal/loan/domain"
 	"xyz-finance-api/internal/loan/entity"
+
+	"gorm.io/gorm"
 )
 
 type loanQueryRepository struct {
@@ -16,17 +18,36 @@ func NewLoanQueryRepository(db *gorm.DB) LoanQueryRepositoryInterface {
 	}
 }
 
-func (lqr *loanQueryRepository) GetAllLoans() ([]domain.Loan, error) {
+func (lqr *loanQueryRepository) GetLoanByID(id string) (domain.Loan, error) {
+	var loanEntity entity.Loan
+	result := lqr.db.Where("id = ?", id).First(&loanEntity)
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return domain.Loan{}, errors.New("loan not found")
+		}
+		return domain.Loan{}, result.Error
+	}
+
+	loanDomain := domain.LoanEntityToLoanDomain(loanEntity)
+
+	return loanDomain, nil
+}
+
+func (lqr *loanQueryRepository) GetAllLoans(userID string) ([]domain.Loan, error) {
 	var loanEntities []entity.Loan
-	result := lqr.db.Find(&loanEntities)
+
+	result := lqr.db.Where("user_id = ?", userID).Find(&loanEntities)
 	if result.Error != nil {
 		return nil, result.Error
 	}
 
+	if len(loanEntities) == 0 {
+		return nil, errors.New("no loans found for this user")
+	}
+
 	var loans []domain.Loan
 	for _, loanEntity := range loanEntities {
-		loanDomain := domain.LoanEntityToLoanDomain(loanEntity)
-		loans = append(loans, loanDomain)
+		loans = append(loans, domain.LoanEntityToLoanDomain(loanEntity))
 	}
 
 	return loans, nil

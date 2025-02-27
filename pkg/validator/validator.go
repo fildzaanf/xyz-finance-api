@@ -7,7 +7,6 @@ import (
 	"regexp"
 	"strings"
 	"time"
-	"xyz-finance-api/internal/payment/domain"
 )
 
 func IsDataEmpty(fields []string, data ...interface{}) error {
@@ -118,27 +117,20 @@ func IsDateValid(date string) error {
 	return nil
 }
 
-func CalculateUsedAmount(payments []domain.Payment) int {
-	totalUsed := 0
-	for _, payment := range payments {
-		totalUsed += payment.AmountPaid
-	}
-	return totalUsed
-}
-
-func CalculateLoanLimit(salary int, tenor int) int {
-
-	limitMultiplier := map[int]float64{
-		1: 0.5, // 50% salary
-		2: 0.7, // 70% salary
-		3: 0.9, // 90% salary
-		6: 1.2, // 120% salary
+func CalculateLoanLimit(salary, tenor int) int {
+	tenorMultiplier := map[int]float64{
+		1: 1.0,
+		2: 1.2,
+		3: 1.5,
+		6: 2.0,
 	}
 
-	multiplier, exists := limitMultiplier[tenor]
+	multiplier, exists := tenorMultiplier[tenor]
 	if !exists {
-		multiplier = 0.5
+		return 0
 	}
 
-	return int(float64(salary) * multiplier)
+	loanLimit := int(float64(salary) * multiplier)
+
+	return loanLimit
 }
