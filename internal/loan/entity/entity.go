@@ -25,7 +25,6 @@ type (
 		Status      LoanStatus `gorm:"type:enum('valid', 'invalid');default:'valid'"`
 		CreatedAt   time.Time  `gorm:"type:timestamp;default:CURRENT_TIMESTAMP"`
 		UpdatedAt   time.Time  `gorm:"type:timestamp;default:CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"`
-		// User        eu.User    `gorm:"foreignKey:UserID;references:ID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE"`
 	}
 )
 

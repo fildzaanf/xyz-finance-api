@@ -23,4 +23,5 @@ func LoanRoutes(loan *echo.Group, db *gorm.DB) {
 	loan.GET("", loanHandler.GetAllLoans, middleware.JWTMiddleware(false))
 	loan.GET("/:id", loanHandler.GetLoanByID, middleware.JWTMiddleware(false))
 	loan.POST("", loanHandler.CreateLoan,  middleware.JWTMiddleware(false))
+	loan.PUT("/:id", loanHandler.UpdateLoanStatusByID, middleware.JWTMiddleware(false))
 }
