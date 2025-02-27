@@ -32,15 +32,16 @@ func (iqu *installmentQueryUsecase) GetInstallmentByID(id string) (domain.Instal
 	return installment, nil
 }
 
-func (iqu *installmentQueryUsecase) GetAllInstallments(userID string) ([]domain.Installment, error) {
-	if userID == "" {
+func (iqu *installmentQueryUsecase) GetAllInstallments(userID, transactionID string) ([]domain.Installment, error) {
+	if userID == "" || transactionID == "" {
 		return nil, errors.New(constant.ERROR_ID_INVALID)
 	}
 
-	installments, err := iqu.installmentQueryRepository.GetAllInstallments(userID)
+	installments, err := iqu.installmentQueryRepository.GetAllInstallments(userID, transactionID)
 	if err != nil {
 		return nil, errors.New(constant.ERROR_DATA_EMPTY)
 	}
 
 	return installments, nil
 }
+

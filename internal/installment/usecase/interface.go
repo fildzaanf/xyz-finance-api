@@ -8,6 +8,6 @@ type InstallmentCommandUsecaseInterface interface {
 }
 
 type InstallmentQueryUsecaseInterface interface {
-	GetAllInstallments(userID string) ([]domain.Installment, error)
+	GetAllInstallments(userID, transactionID string) ([]domain.Installment, error)
 	GetInstallmentByID(id string) (domain.Installment, error)
 }

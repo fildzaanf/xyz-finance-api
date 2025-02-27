@@ -23,6 +23,7 @@ func NewTransactionHandler(tcu usecase.TransactionCommandUsecaseInterface, tqu u
 	}
 }
 
+// command
 func (th *transactionHandler) CreateTransaction(c echo.Context) error {
 	tokenUserID, role, errExtract := middleware.ExtractToken(c)
 	if errExtract != nil {
@@ -50,36 +51,4 @@ func (th *transactionHandler) CreateTransaction(c echo.Context) error {
 	transactionResponse := dto.TransactionDomainToTransactionResponse(createdTransaction)
 
 	return c.JSON(http.StatusCreated, response.SuccessResponse(constant.SUCCESS_CREATED_TRANSACTION, transactionResponse))
-}
-
-func (th *transactionHandler) GetAllTransactions(c echo.Context) error {
-	tokenUserID, role, errExtract := middleware.ExtractToken(c)
-	if errExtract != nil {
-		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
-	}
-
-	if role != constant.USER {
-		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
-	}
-
-	transactions, err := th.transactionQueryUsecase.GetAllTransactions(tokenUserID)
-	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
-	}
-
-	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, transactions))
-}
-
-func (th *transactionHandler) GetTransactionByID(c echo.Context) error {
-	transactionID := c.Param("id")
-	if transactionID == "" {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
-	}
-
-	transaction, err := th.transactionQueryUsecase.GetTransactionByID(transactionID)
-	if err != nil {
-		return c.JSON(http.StatusNotFound, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
-	}
-
-	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, transaction))
 }

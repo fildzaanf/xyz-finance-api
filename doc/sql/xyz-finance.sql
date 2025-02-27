@@ -56,10 +56,9 @@ CREATE TABLE Installments (
 CREATE TABLE Payments (
     id VARCHAR(36) PRIMARY KEY,
     installment_id VARCHAR(36) NOT NULL,
-    order_id VARCHAR(100) NOT NULL UNIQUE,
+    transaction_id VARCHAR(100) NOT NULL UNIQUE,
     payment_url VARCHAR(100) NOT NULL,
-    payment_type VARCHAR(100) NOT NULL,
-    amount DECIMAL(15,2) NOT NULL,
+    gross_amount DECIMAL(15,2) NOT NULL,
     status VARCHAR(50) NOT NULL,
     created_at TIMESTAMPTZ DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (installment_id) REFERENCES Installments(id) ON DELETE CASCADE
