@@ -52,3 +52,12 @@ func (lqr *loanQueryRepository) GetAllLoans(userID string) ([]domain.Loan, error
 
 	return loans, nil
 }
+
+func (lr *loanQueryRepository) GetLoanByUserID(userID string, tenor int) (domain.Loan, error) {
+	var loan domain.Loan
+	err := lr.db.Where("user_id = ? AND tenor = ?", userID, tenor).First(&loan).Error
+	if err != nil {
+		return domain.Loan{}, err
+	}
+	return loan, nil
+}
