@@ -45,3 +45,17 @@ func (iqu *installmentQueryUsecase) GetAllInstallments(userID, transactionID str
 	return installments, nil
 }
 
+func (icu *installmentQueryUsecase) GetInstallmentByTransactionID(transactionID string) ([]domain.Installment, error) {
+    if transactionID == "" {
+        return nil, errors.New("transactionID cannot be empty")
+    }
+
+    installments, err := icu.installmentQueryRepository.GetInstallmentByTransactionID(transactionID)
+    if err != nil {
+        return nil, err
+    }
+
+    return installments, nil
+}
+
+

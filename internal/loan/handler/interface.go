@@ -9,4 +9,5 @@ type LoanHandlerInterface interface {
 	// Query
 	GetAllLoans(c echo.Context) error
 	GetLoanByID(c echo.Context) error
+	GetInstallmentByTransactionID(c echo.Context) error
 }

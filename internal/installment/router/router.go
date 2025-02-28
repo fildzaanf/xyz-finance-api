@@ -23,6 +23,7 @@ func InstallmentRoutes(installment *echo.Group, db *gorm.DB) {
 
 	installment.GET("", installmentHandler.GetAllInstallments, middleware.JWTMiddleware(false))
 	installment.GET("/:id", installmentHandler.GetInstallmentByID, middleware.JWTMiddleware(false))
+	installment.GET("/:transaction_id", installmentHandler.GetInstallmentByTransactionID, middleware.JWTMiddleware(false))
 	installment.POST("", installmentHandler.CreateInstallment, middleware.JWTMiddleware(false))
 	installment.PUT("/:id", installmentHandler.UpdateInstallmentStatusByID, middleware.JWTMiddleware(false))
 }
