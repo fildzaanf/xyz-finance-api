@@ -20,11 +20,11 @@ type (
 	Loan struct {
 		ID          string     `gorm:"type:varchar(36);primaryKey"`
 		UserID      string     `gorm:"type:varchar(36);not null"`
-		Tenor       int        `gorm:"not null"`
+		Tenor       int        `gorm:"not null;unique"`
 		LimitAmount int        `gorm:"not null"`
 		Status      LoanStatus `gorm:"type:enum('valid', 'invalid');default:'valid'"`
-		CreatedAt   time.Time  `gorm:"type:timestamp;default:CURRENT_TIMESTAMP"`
-		UpdatedAt   time.Time  `gorm:"type:timestamp;default:CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"`
+		CreatedAt   time.Time  
+		UpdatedAt   time.Time  
 	}
 )
 

@@ -107,3 +107,14 @@ func (ih *installmentHandler) GetInstallmentByID(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, installment))
 }
+
+func (ih *installmentHandler) GetInstallmentByTransactionID(c echo.Context) error {
+    transactionID := c.Param("transactionID")
+
+    installments, err := ih.installmentQueryUsecase.GetInstallmentByTransactionID(transactionID)
+    if err != nil {
+        return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
+    }
+
+    return c.JSON(http.StatusOK, response.SuccessResponse("Installments retrieved successfully", installments))
+}

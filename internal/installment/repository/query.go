@@ -46,3 +46,14 @@ func (iqr *installmentQueryRepository) GetInstallmentByID(id string) (domain.Ins
 
 	return installment, nil
 }
+
+func (repo *installmentQueryRepository) GetInstallmentByTransactionID(transactionID string) ([]domain.Installment, error) {
+    var installments []domain.Installment
+
+    result := repo.db.Where("transaction_id = ?", transactionID).Find(&installments)
+    if result.Error != nil {
+        return nil, result.Error
+    }
+
+    return installments, nil
+}

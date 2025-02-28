@@ -10,4 +10,5 @@ type InstallmentHandlerInterface interface {
 	// Query
 	GetAllInstallments(c echo.Context) error
 	GetInstallmentByID(c echo.Context) error
+	GetInstallmentByTransactionID(c echo.Context) error
 }

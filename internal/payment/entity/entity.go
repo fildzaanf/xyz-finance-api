@@ -15,8 +15,8 @@ type Payment struct {
 	Status        string    `gorm:"type:enum('pending', 'success', 'failed', 'expired');default:'pending'"`
 	PaymentURL    string    `gorm:"type:text"`
 	Token         string    `gorm:"type:text"`
-	CreatedAt     time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP"`
-	UpdatedAt     time.Time `gorm:"type:timestamp;default:CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP"`
+	CreatedAt     time.Time 
+	UpdatedAt     time.Time 
 }
 
 // hooks
