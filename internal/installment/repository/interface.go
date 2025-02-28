@@ -11,4 +11,5 @@ type InstallmentQueryRepositoryInterface interface {
 	GetAllInstallments(userID, transactionID string) ([]domain.Installment, error)
 	GetInstallmentByID(id string) (domain.Installment, error)
 	GetInstallmentByTransactionID(transactionID string) ([]domain.Installment, error)
+	CountInstallmentsByTransactionID(transactionID string) (int, error)
 }

@@ -10,4 +10,5 @@ type LoanCommandRepositoryInterface interface {
 type LoanQueryRepositoryInterface interface {
 	GetAllLoans(userID string) ([]domain.Loan, error)
 	GetLoanByID(id string) (domain.Loan, error)
+	GetLoanByUserID(userID string, tenor int) (domain.Loan, error)
 }

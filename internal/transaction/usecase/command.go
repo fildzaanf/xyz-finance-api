@@ -4,9 +4,6 @@ import (
 	"errors"
 	"fmt"
 	"time"
-	id "xyz-finance-api/internal/installment/domain"
-	"xyz-finance-api/internal/installment/dto"
-	repositoryInstallment "xyz-finance-api/internal/installment/repository"
 	repositoryLoan "xyz-finance-api/internal/loan/repository"
 	"xyz-finance-api/internal/transaction/domain"
 	"xyz-finance-api/internal/transaction/repository"
@@ -19,16 +16,14 @@ type transactionCommandUsecase struct {
 	transactionQueryRepository   repository.TransactionQueryRepositoryInterface
 	loanQueryRepository          repositoryLoan.LoanQueryRepositoryInterface
 	loanCommandRepository        repositoryLoan.LoanCommandRepositoryInterface
-	installmentCommandRepository repositoryInstallment.InstallmentCommandRepositoryInterface
 }
 
-func NewTransactionCommandUsecase(tcr repository.TransactionCommandRepositoryInterface, tqr repository.TransactionQueryRepositoryInterface, lqr repositoryLoan.LoanQueryRepositoryInterface, lcr repositoryLoan.LoanCommandRepositoryInterface, icr repositoryInstallment.InstallmentCommandRepositoryInterface) TransactionCommandUsecaseInterface {
+func NewTransactionCommandUsecase(tcr repository.TransactionCommandRepositoryInterface, tqr repository.TransactionQueryRepositoryInterface, lqr repositoryLoan.LoanQueryRepositoryInterface, lcr repositoryLoan.LoanCommandRepositoryInterface) TransactionCommandUsecaseInterface {
 	return &transactionCommandUsecase{
 		transactionCommandRepository: tcr,
 		transactionQueryRepository:   tqr,
 		loanQueryRepository:          lqr,
 		loanCommandRepository:        lcr,
-		installmentCommandRepository: icr,
 	}
 }
 
@@ -77,19 +72,6 @@ func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Trans
 	_, errUpdateLoan := tcs.loanCommandRepository.UpdateLoanStatusByID(loan.ID, loan)
 	if errUpdateLoan != nil {
 		return domain.Transaction{}, errUpdateLoan
-	}
-
-	installmentRequest := dto.InstallmentRequest{
-		TransactionID: transactionEntity.ID,
-	}
-
-	installmentDomain := id.Installment{
-		TransactionID: installmentRequest.TransactionID,
-	}
-
-	_, errCreateInstallments := tcs.installmentCommandRepository.CreateInstallment(installmentDomain)
-	if errCreateInstallments != nil {
-		return domain.Transaction{}, errCreateInstallments
 	}
 
 	return transactionEntity, nil

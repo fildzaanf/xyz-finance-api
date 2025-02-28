@@ -57,3 +57,16 @@ func (repo *installmentQueryRepository) GetInstallmentByTransactionID(transactio
 
     return installments, nil
 }
+
+func (repo *installmentQueryRepository) CountInstallmentsByTransactionID(transactionID string) (int, error) {
+	var count int64
+	err := repo.db.Model(&domain.Installment{}).
+		Where("transaction_id = ?", transactionID).
+		Count(&count).Error
+
+	if err != nil {
+		return 0, err
+	}
+	return int(count), nil
+}
+
