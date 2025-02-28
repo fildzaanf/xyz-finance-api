@@ -49,15 +49,17 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 	installments := make([]domain.Installment, 0, transaction.Tenor)
 
 
+
 	createdAt := time.Now()
 	for i := 1; i <= transaction.Tenor; i++ {
+		dueDate := createdAt.AddDate(0, i, 0)
 		installment := domain.Installment{
 			TransactionID:    request.TransactionID,
 			InstallmentNumber: i,
 			Amount:           amountPerInstallment,
 			Status:           "unpaid",
 			CreatedAt:        createdAt,
-			DueDate:          createdAt.AddDate(0, i, 0), 
+			DueDate:          dueDate, 
 		}
 
 		installmentEntity, errCreate := ics.installmentCommandRepository.CreateInstallment(installment)
