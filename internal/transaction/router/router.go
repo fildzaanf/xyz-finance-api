@@ -2,7 +2,6 @@ package router
 
 import (
 	repositoryLoan "xyz-finance-api/internal/loan/repository"
-	repositoryInstallment "xyz-finance-api/internal/installment/repository"
 	"xyz-finance-api/internal/transaction/handler"
 	"xyz-finance-api/internal/transaction/repository"
 	"xyz-finance-api/internal/transaction/usecase"
@@ -17,10 +16,9 @@ func TransactionRoutes(transaction *echo.Group, db *gorm.DB) {
 	transactionCommandRepository := repository.NewTransactionCommandRepository(db)
 	loanQueryRepository := repositoryLoan.NewLoanQueryRepository(db)
 	loanCommandRepository := repositoryLoan.NewLoanCommandRepository(db)
-	installmentCommandRepository := repositoryInstallment.NewInstallmentCommandRepository(db)
 
 	transactionQueryUsecase := usecase.NewTransactionQueryUsecase(transactionQueryRepository, transactionCommandRepository)
-	transactionCommandUsecase := usecase.NewTransactionCommandUsecase(transactionCommandRepository, transactionQueryRepository, loanQueryRepository, loanCommandRepository, installmentCommandRepository)
+	transactionCommandUsecase := usecase.NewTransactionCommandUsecase(transactionCommandRepository, transactionQueryRepository, loanQueryRepository, loanCommandRepository)
 
 	transactionHandler := handler.NewTransactionHandler(transactionCommandUsecase, transactionQueryUsecase)
 

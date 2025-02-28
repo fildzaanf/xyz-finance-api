@@ -13,9 +13,9 @@ type Installment struct {
 	TransactionID     string    `gorm:"type:varchar(36);not null"`
 	InstallmentNumber int       `gorm:"not null"`
 	Amount            int       `gorm:"not null"`
-	DueDate           time.Time `gorm:"type:date;not null"`
+	DueDate           time.Time 
 	Status            string    `gorm:"type:varchar(50);not null"`
-	CreatedAt         time.Time 
+	CreatedAt         time.Time
 	UpdatedAt         time.Time 
 }
 

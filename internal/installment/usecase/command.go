@@ -37,7 +37,7 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 		return nil, errors.New(constant.ERROR_ID_NOTFOUND)
 	}
 
-	if transaction.Status == "success" {
+	if transaction.Status == "failed" {
 		return nil, errors.New("transaction failed")
 	}
 
@@ -45,21 +45,33 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 		return nil, errors.New("invalid tenor value")
 	}
 
+
+	existingInstallments, errCount := ics.installmentQueryRepository.CountInstallmentsByTransactionID(request.TransactionID)
+	if errCount != nil {
+		return nil, errCount
+	}
+
+	if existingInstallments >= transaction.Tenor {
+		return nil, errors.New("installment count exceeds tenor limit")
+	}
+
+
 	amountPerInstallment := transaction.TotalAmount / transaction.Tenor
 	installments := make([]domain.Installment, 0, transaction.Tenor)
 
-
-
-	createdAt := time.Now()
+	
 	for i := 1; i <= transaction.Tenor; i++ {
+		createdAt := time.Now()
+
 		dueDate := createdAt.AddDate(0, i, 0)
+
 		installment := domain.Installment{
-			TransactionID:    request.TransactionID,
+			TransactionID:     request.TransactionID,
 			InstallmentNumber: i,
-			Amount:           amountPerInstallment,
-			Status:           "unpaid",
-			CreatedAt:        createdAt,
-			DueDate:          dueDate, 
+			Amount:            amountPerInstallment,
+			Status:            "unpaid",
+			CreatedAt:         createdAt,
+			DueDate:           dueDate,
 		}
 
 		installmentEntity, errCreate := ics.installmentCommandRepository.CreateInstallment(installment)
@@ -72,7 +84,6 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 
 	return installments, nil
 }
-
 
 func (icu *installmentCommandUsecase) UpdateInstallmentStatusByID(id string, installment domain.Installment) (domain.Installment, error) {
 	existingInstallment, err := icu.installmentQueryRepository.GetInstallmentByID(id)

@@ -30,6 +30,16 @@ func (lcu *loanCommandUsecase) CreateLoan(loan domain.Loan) (domain.Loan, error)
 		return domain.Loan{}, errEmpty
 	}
 
+	validTenors := map[int]bool{1: true, 2: true, 3: true, 6: true}
+	if !validTenors[loan.Tenor] {
+		return domain.Loan{}, errors.New("the tenor is not valid, it can only be 1, 2, 3, or 6")
+	}
+
+	existingLoan, err := lcu.loanQueryRepository.GetLoanByUserID(loan.UserID, loan.Tenor)
+	if err == nil && existingLoan.ID != "" {
+		return domain.Loan{}, errors.New("user already has a loan with this tenor")
+	}
+
 	user, errUser := lcu.userQueryRepository.GetUserByID(loan.UserID)
 	if errUser != nil {
 		return domain.Loan{}, errors.New(constant.ERROR_ID_NOTFOUND)
