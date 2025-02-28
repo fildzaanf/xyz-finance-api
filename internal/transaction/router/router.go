@@ -25,6 +25,6 @@ func TransactionRoutes(transaction *echo.Group, db *gorm.DB) {
 	transactionHandler := handler.NewTransactionHandler(transactionCommandUsecase, transactionQueryUsecase)
 
 	transaction.POST("", transactionHandler.CreateTransaction, middleware.JWTMiddleware(false))
-	transaction.GET("", transactionHandler.GetAllTransactions, middleware.JWTMiddleware(false))
-	transaction.GET("/:id", transactionHandler.GetTransactionByID, middleware.JWTMiddleware(false))
+	// transaction.GET("", transactionHandler.GetAllTransactions, middleware.JWTMiddleware(false))
+	// transaction.GET("/:id", transactionHandler.GetTransactionByID, middleware.JWTMiddleware(false))
 }
