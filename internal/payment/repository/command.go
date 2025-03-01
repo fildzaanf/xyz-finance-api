@@ -2,6 +2,7 @@ package repository
 
 import (
 	"errors"
+	dl "xyz-finance-api/internal/loan/domain"
 	"xyz-finance-api/internal/payment/domain"
 
 	"gorm.io/gorm"
@@ -29,7 +30,6 @@ func (pcr *paymentCommandRepository) CreatePayment(payment domain.Payment) (doma
 
 	return paymentDomain, nil
 }
-
 func (pcr *paymentCommandRepository) UpdatePaymentStatus(installmentID, status string) error {
 	result := pcr.db.Model(&domain.Payment{}).
 		Where("installment_id = ?", installmentID).
@@ -41,6 +41,45 @@ func (pcr *paymentCommandRepository) UpdatePaymentStatus(installmentID, status s
 
 	if result.RowsAffected == 0 {
 		return errors.New("no payment record updated")
+	}
+
+	return nil
+}
+
+func (pcr *paymentCommandRepository) UpdateLoanStatus(installmentID string) error {
+	var transactionID string
+	err := pcr.db.Table("installments").
+		Select("transaction_id").
+		Where("id = ?", installmentID).
+		Scan(&transactionID).Error
+	if err != nil {
+		return err
+	}
+
+	var unpaidInstallments int64
+	err = pcr.db.Table("installments").
+		Where("transaction_id = ? AND status != ?", transactionID, "paid").
+		Count(&unpaidInstallments).Error
+	if err != nil {
+		return err
+	}
+
+	if unpaidInstallments == 0 {
+		var loanID string
+		err = pcr.db.Table("transactions").
+			Select("loan_id").
+			Where("id = ?", transactionID).
+			Scan(&loanID).Error
+		if err != nil {
+			return err
+		}
+
+		err = pcr.db.Model(&dl.Loan{}).
+			Where("id = ?", loanID).
+			Update("status", "valid").Error
+		if err != nil {
+			return err
+		}
 	}
 
 	return nil
