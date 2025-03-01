@@ -10,7 +10,6 @@ import (
 type Payment struct {
 	ID            string    `gorm:"type:varchar(36);primaryKey"`
 	InstallmentID string    `gorm:"type:varchar(36);not null"`
-	OrderID       string    `gorm:"type:varchar(100);not null;unique"`
 	GrossAmount   int       `gorm:"not null"`
 	Status        string    `gorm:"type:enum('pending', 'success', 'failed', 'expired');default:'pending'"`
 	PaymentURL    string    `gorm:"type:text"`

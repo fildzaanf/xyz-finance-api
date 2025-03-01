@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"errors"
 	"xyz-finance-api/internal/payment/domain"
 
 	"gorm.io/gorm"
@@ -27,4 +28,20 @@ func (pcr *paymentCommandRepository) CreatePayment(payment domain.Payment) (doma
 	paymentDomain := domain.PaymentEntityToPaymentDomain(paymentEntity)
 
 	return paymentDomain, nil
+}
+
+func (pcr *paymentCommandRepository) UpdatePaymentStatus(installmentID, status string) error {
+	result := pcr.db.Model(&domain.Payment{}).
+		Where("installment_id = ?", installmentID).
+		Update("status", status)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	if result.RowsAffected == 0 {
+		return errors.New("no payment record updated")
+	}
+
+	return nil
 }

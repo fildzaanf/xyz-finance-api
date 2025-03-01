@@ -26,6 +26,8 @@ func PaymentRoutes(payment *echo.Group, db *gorm.DB) {
 	paymentHandler := handler.NewPaymentHandler(paymentCommandUsecase, paymentQueryUsecase)
 
 	payment.POST("", paymentHandler.CreatePayment, middleware.JWTMiddleware(false)) 
+	payment.POST("/midtrans/webhook", paymentHandler.MidtransWebhook)
+
 }
 
 
