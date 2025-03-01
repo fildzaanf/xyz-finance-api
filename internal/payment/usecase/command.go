@@ -3,6 +3,7 @@ package usecase
 import (
 	"errors"
 	"time"
+
 	di "xyz-finance-api/internal/installment/domain"
 	repositoryInstallment "xyz-finance-api/internal/installment/repository"
 	repositoryLoan "xyz-finance-api/internal/loan/repository"
@@ -67,7 +68,6 @@ func (pcu *paymentCommandUsecase) CreatePayment(payment domain.Payment, userID s
 	payment.GrossAmount = installment.Amount
 	payment.PaymentURL = snapResponse.RedirectURL
 	payment.Token = snapResponse.Token
-	payment.Status = "success"
 	payment.CreatedAt = time.Now()
 	payment.UpdatedAt = time.Now()
 
@@ -76,10 +76,39 @@ func (pcu *paymentCommandUsecase) CreatePayment(payment domain.Payment, userID s
 		return domain.Payment{}, errCreate
 	}
 
-	_, errUpdateInstallment := pcu.installmentCommandRepository.UpdateInstallmentStatusByID(payment.InstallmentID, di.Installment{Status: "paid"})
-	if errUpdateInstallment != nil {
-		return domain.Payment{}, errUpdateInstallment
+	return paymentEntity, nil
+}
+
+func (pcu *paymentCommandUsecase) UpdatePaymentStatus(installmentID, status string) error {
+	payment, err := pcu.paymentQueryRepository.GetPaymentByInstallmentID(installmentID)
+	if err != nil {
+		return errors.New("payment not found")
 	}
 
-	return paymentEntity, nil
+	switch status {
+	case "settlement":
+		payment.Status = "success"
+	case "expire":
+		payment.Status = "expire"
+	case "cancel":
+		payment.Status = "cancel"
+	case "deny":
+		payment.Status = "deny"
+	default:
+		payment.Status = status
+	}
+
+	err = pcu.paymentCommandRepository.UpdatePaymentStatus(installmentID, status)
+	if err != nil {
+		return errors.New("failed to update payment status")
+	}
+
+	if payment.Status == "success" {
+		_, err = pcu.installmentCommandRepository.UpdateInstallmentStatusByID(payment.InstallmentID, di.Installment{Status: "paid"})
+		if err != nil {
+			return errors.New("failed to update installment status")
+		}
+	}
+
+	return nil
 }
