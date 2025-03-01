@@ -108,6 +108,12 @@ func (pcu *paymentCommandUsecase) UpdatePaymentStatus(installmentID, status stri
 		if err != nil {
 			return errors.New("failed to update installment status")
 		}
+
+
+		err = pcu.paymentCommandRepository.UpdateLoanStatus(payment.InstallmentID)
+		if err != nil {
+			return errors.New("failed to update loan status")
+		}
 	}
 
 	return nil
