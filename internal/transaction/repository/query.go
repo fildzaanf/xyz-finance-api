@@ -19,9 +19,14 @@ func NewTransactionQueryRepository(db *gorm.DB) TransactionQueryRepositoryInterf
 	}
 }
 
-func (tqr *transactionQueryRepository) GetTransactionByID(id string) (domain.Transaction, error) {
-	var transactionEntity entity.Transaction
-	result := tqr.db.Where("id = ?", id).First(&transactionEntity)
+func (tr *transactionQueryRepository) GetTransactionByID(transactionID, userID string) (domain.Transaction, error) {
+	var transaction entity.Transaction
+	result := tr.db.
+		Joins("JOIN loans ON loans.id = transactions.loan_id").
+		Where("transactions.id = ? AND loans.user_id = ?", transactionID, userID).
+		Select("transactions.*").
+		First(&transaction)
+
 	if result.Error != nil {
 		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 			return domain.Transaction{}, errors.New("transaction not found")
@@ -29,27 +34,24 @@ func (tqr *transactionQueryRepository) GetTransactionByID(id string) (domain.Tra
 		return domain.Transaction{}, result.Error
 	}
 
-	transactionDomain := domain.TransactionEntityToTransactionDomain(transactionEntity)
-
-	return transactionDomain, nil
+	return domain.TransactionEntityToTransactionDomain(transaction), nil
 }
 
-func (tqr *transactionQueryRepository) GetAllTransactions(userID string) ([]domain.Transaction, error) {
-	var transactionEntities []entity.Transaction
 
-	result := tqr.db.Where("user_id = ?", userID).Find(&transactionEntities)
+func (tr *transactionQueryRepository) GetAllTransactions(userID string) ([]domain.Transaction, error) {
+	var transactions []entity.Transaction
+	result := tr.db.
+		Joins("JOIN loans ON loans.id = transactions.loan_id").
+		Where("loans.user_id = ?", userID).
+		Select("transactions.*").
+		Find(&transactions)
+
 	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			return nil, errors.New("no transactions found")
+		}
 		return nil, result.Error
 	}
 
-	if len(transactionEntities) == 0 {
-		return nil, errors.New("no transactions found for this user")
-	}
-
-	var transactions []domain.Transaction
-	for _, transactionEntity := range transactionEntities {
-		transactions = append(transactions, domain.TransactionEntityToTransactionDomain(transactionEntity))
-	}
-
-	return transactions, nil
+	return domain.ListTransactionEntityToTransactionDomain(transactions), nil
 }

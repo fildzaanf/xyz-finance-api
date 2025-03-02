@@ -26,6 +26,7 @@ func NewPaymentHandler(pcu usecase.PaymentCommandUsecaseInterface, pqu usecase.P
 	}
 }
 
+// command
 func (ph *paymentHandler) CreatePayment(c echo.Context) error {
 
 	tokenUserID, role, errExtract := middleware.ExtractToken(c)
@@ -96,9 +97,50 @@ func (ph *paymentHandler) MidtransWebhook(c echo.Context) error {
 
 	err = ph.paymentCommandUsecase.UpdatePaymentStatus(orderID, newStatus)
 	if err != nil {
-		fmt.Println("Failed to update payment status:", err)
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse("Failed to update payment status"))
 	}
 
 	return c.JSON(http.StatusOK, response.SuccessResponse("Payment status updated", nil))
+}
+
+// query
+func (ph *paymentHandler) GetPaymentByID(c echo.Context) error {
+	paymentID := c.Param("id")
+	if paymentID == "" {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
+	}
+
+	tokenUserID, role, errExtract := middleware.ExtractToken(c)
+	if errExtract != nil {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
+	}
+
+	if role != constant.USER {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
+	}
+
+	payment, err := ph.paymentQueryUsecase.GetPaymentByID(paymentID, tokenUserID)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, response.ErrorResponse(err.Error()))
+	}
+
+	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, payment))
+}
+
+func (ph *paymentHandler) GetAllPayments(c echo.Context) error {
+	tokenUserID, role, errExtract := middleware.ExtractToken(c)
+	if errExtract != nil {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
+	}
+
+	if role != constant.USER {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
+	}
+
+	payments, err := ph.paymentQueryUsecase.GetAllPayments(tokenUserID)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, response.ErrorResponse(err.Error()))
+	}
+
+	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, payments))
 }

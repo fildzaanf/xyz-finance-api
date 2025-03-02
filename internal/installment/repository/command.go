@@ -19,7 +19,7 @@ func NewInstallmentCommandRepository(db *gorm.DB) InstallmentCommandRepositoryIn
 	}
 }
 
-func (icr *installmentCommandRepository) CreateInstallment(installment domain.Installment) (domain.Installment, error) {
+func (icr *installmentCommandRepository) CreateInstallment(installment domain.Installment, userID string) (domain.Installment, error) {
 	installmentEntity := domain.InstallmentDomainToInstallmentEntity(installment)
 
 	result := icr.db.Create(&installmentEntity)
@@ -32,10 +32,10 @@ func (icr *installmentCommandRepository) CreateInstallment(installment domain.In
 	return installmentDomain, nil
 }
 
-func (icr *installmentCommandRepository) UpdateInstallmentStatusByID(id string, installment domain.Installment) (domain.Installment, error) {
+func (icr *installmentCommandRepository) UpdateInstallmentStatusByID(installmentID string, installment domain.Installment) (domain.Installment, error) {
 
 	var existingInstallment domain.Installment
-	err := icr.db.Where("id = ?", id).First(&existingInstallment).Error
+	err := icr.db.Where("id = ?", installmentID).First(&existingInstallment).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrRecordNotFound) {
 			return domain.Installment{}, errors.New(constant.ERROR_ID_NOTFOUND)
@@ -44,7 +44,7 @@ func (icr *installmentCommandRepository) UpdateInstallmentStatusByID(id string, 
 	}
 
 	installment.UpdatedAt = time.Now()
-	result := icr.db.Model(&domain.Installment{}).Where("id = ?", id).
+	result := icr.db.Model(&domain.Installment{}).Where("id = ?", installmentID).
 		Updates(map[string]interface{}{
 			"status":     installment.Status,
 			"updated_at": installment.UpdatedAt,

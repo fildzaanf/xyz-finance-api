@@ -8,6 +8,6 @@ type TransactionCommandUsecaseInterface interface {
 
 type TransactionQueryUsecaseInterface interface {
 	GetAllTransactions(userID string) ([]domain.Transaction, error)
-	GetTransactionByID(id string) (domain.Transaction, error)
+	GetTransactionByID(transactionID, userID string) (domain.Transaction, error)
 	
 }
