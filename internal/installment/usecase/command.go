@@ -9,34 +9,51 @@ import (
 	repositoryTransaction "xyz-finance-api/internal/transaction/repository"
 	"xyz-finance-api/pkg/constant"
 	"xyz-finance-api/pkg/validator"
+	userRepository "xyz-finance-api/internal/user/repository"
 )
 
 type installmentCommandUsecase struct {
 	installmentCommandRepository repository.InstallmentCommandRepositoryInterface
 	installmentQueryRepository   repository.InstallmentQueryRepositoryInterface
 	transactionQueryRepository   repositoryTransaction.TransactionQueryRepositoryInterface
+	userQueryRepository          userRepository.UserQueryRepositoryInterface
 }
 
-func NewInstallmentCommandUsecase(icr repository.InstallmentCommandRepositoryInterface, iqr repository.InstallmentQueryRepositoryInterface, tqr repositoryTransaction.TransactionQueryRepositoryInterface) InstallmentCommandUsecaseInterface {
+func NewInstallmentCommandUsecase(icr repository.InstallmentCommandRepositoryInterface, iqr repository.InstallmentQueryRepositoryInterface, tqr repositoryTransaction.TransactionQueryRepositoryInterface, uqr  userRepository.UserQueryRepositoryInterface) InstallmentCommandUsecaseInterface {
 	return &installmentCommandUsecase{
 		installmentCommandRepository: icr,
 		installmentQueryRepository:   iqr,
 		transactionQueryRepository:   tqr,
+		userQueryRepository: uqr,
 	}
 }
 
-func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installment) ([]domain.Installment, error) {
+func (icu *installmentCommandUsecase) CreateInstallment(request domain.Installment, userID string) ([]domain.Installment, error) {
 
 	errEmpty := validator.IsDataEmpty([]string{"transaction_id"}, request.TransactionID)
 	if errEmpty != nil {
 		return nil, errEmpty
 	}
 
-	transaction, errTransaction := ics.transactionQueryRepository.GetTransactionByID(request.TransactionID)
+	transaction, errTransaction := icu.transactionQueryRepository.GetTransactionByID(request.TransactionID, userID)
 	if errTransaction != nil {
 		return nil, errors.New(constant.ERROR_ID_NOTFOUND)
 	}
 
+
+	user, err := icu.userQueryRepository.GetUserByID(userID)
+	if err != nil {
+		return nil, err
+	}
+
+	if user.ID != userID {
+		return nil, errors.New(constant.ERROR_ROLE_ACCESS)
+	}
+
+	if transaction.ID != request.TransactionID {
+		return nil, errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+	
 	if transaction.Status == "failed" {
 		return nil, errors.New("transaction failed")
 	}
@@ -46,7 +63,7 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 	}
 
 
-	existingInstallments, errCount := ics.installmentQueryRepository.CountInstallmentsByTransactionID(request.TransactionID)
+	existingInstallments, errCount := icu.installmentQueryRepository.CountInstallmentsByTransactionID(request.TransactionID)
 	if errCount != nil {
 		return nil, errCount
 	}
@@ -74,7 +91,7 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 			DueDate:           dueDate,
 		}
 
-		installmentEntity, errCreate := ics.installmentCommandRepository.CreateInstallment(installment)
+		installmentEntity, errCreate := icu.installmentCommandRepository.CreateInstallment(installment, userID)
 		if errCreate != nil {
 			return nil, errCreate
 		}
@@ -85,11 +102,25 @@ func (ics *installmentCommandUsecase) CreateInstallment(request domain.Installme
 	return installments, nil
 }
 
-func (icu *installmentCommandUsecase) UpdateInstallmentStatusByID(id string, installment domain.Installment) (domain.Installment, error) {
-	existingInstallment, err := icu.installmentQueryRepository.GetInstallmentByID(id)
+func (icu *installmentCommandUsecase) UpdateInstallmentStatusByID(installmentID string, installment domain.Installment, userID string) (domain.Installment, error) {
+	existingInstallment, err := icu.installmentQueryRepository.GetInstallmentByID(installmentID, userID)
 	if err != nil {
 		return domain.Installment{}, errors.New(constant.ERROR_ID_NOTFOUND)
 	}
+
+	if existingInstallment.ID != installmentID {
+		return domain.Installment{}, errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+
+	user, err := icu.userQueryRepository.GetUserByID(userID)
+	if err != nil {
+		return domain.Installment{}, err
+	}
+
+	if user.ID != userID {
+		return domain.Installment{}, errors.New(constant.ERROR_ROLE_ACCESS)
+	}
+
 
 	if installment.Status != "paid" && installment.Status != "unpaid" {
 		return domain.Installment{}, errors.New("invalid status update request")
@@ -98,7 +129,7 @@ func (icu *installmentCommandUsecase) UpdateInstallmentStatusByID(id string, ins
 	existingInstallment.Status = installment.Status
 	existingInstallment.UpdatedAt = time.Now()
 
-	updatedInstallment, err := icu.installmentCommandRepository.UpdateInstallmentStatusByID(id, existingInstallment)
+	updatedInstallment, err := icu.installmentCommandRepository.UpdateInstallmentStatusByID(installmentID, existingInstallment)
 	if err != nil {
 		return domain.Installment{}, err
 	}
