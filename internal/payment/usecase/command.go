@@ -10,7 +10,10 @@ import (
 	"xyz-finance-api/internal/payment/domain"
 	"xyz-finance-api/internal/payment/repository"
 	"xyz-finance-api/pkg/config"
+	"xyz-finance-api/pkg/constant"
 	"xyz-finance-api/pkg/validator"
+
+	userRepository "xyz-finance-api/internal/user/repository"
 
 	"github.com/midtrans/midtrans-go"
 	"github.com/midtrans/midtrans-go/snap"
@@ -22,15 +25,17 @@ type paymentCommandUsecase struct {
 	installmentQueryRepository   repositoryInstallment.InstallmentQueryRepositoryInterface
 	installmentCommandRepository repositoryInstallment.InstallmentCommandRepositoryInterface
 	loanCommandRepository        repositoryLoan.LoanCommandRepositoryInterface
+	userQueryRepository          userRepository.UserQueryRepositoryInterface
 }
 
-func NewPaymentCommandUsecase(pcr repository.PaymentCommandRepositoryInterface, pqr repository.PaymentQueryRepositoryInterface, iqr repositoryInstallment.InstallmentQueryRepositoryInterface, icr repositoryInstallment.InstallmentCommandRepositoryInterface, lcr repositoryLoan.LoanCommandRepositoryInterface) PaymentCommandUsecaseInterface {
+func NewPaymentCommandUsecase(pcr repository.PaymentCommandRepositoryInterface, pqr repository.PaymentQueryRepositoryInterface, iqr repositoryInstallment.InstallmentQueryRepositoryInterface, icr repositoryInstallment.InstallmentCommandRepositoryInterface, lcr repositoryLoan.LoanCommandRepositoryInterface, uqr userRepository.UserQueryRepositoryInterface) PaymentCommandUsecaseInterface {
 	return &paymentCommandUsecase{
 		paymentCommandRepository:     pcr,
 		paymentQueryRepository:       pqr,
 		installmentQueryRepository:   iqr,
 		installmentCommandRepository: icr,
 		loanCommandRepository:        lcr,
+		userQueryRepository:          uqr,
 	}
 }
 
@@ -40,9 +45,22 @@ func (pcu *paymentCommandUsecase) CreatePayment(payment domain.Payment, userID s
 		return domain.Payment{}, errEmpty
 	}
 
-	installment, errInstallment := pcu.installmentQueryRepository.GetInstallmentByID(payment.InstallmentID)
+	installment, errInstallment := pcu.installmentQueryRepository.GetInstallmentByID(payment.InstallmentID, userID)
 	if errInstallment != nil {
 		return domain.Payment{}, errors.New("installment not found")
+	}
+
+	if installment.ID != payment.InstallmentID {
+		return domain.Payment{}, errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+
+	user, err := pcu.userQueryRepository.GetUserByID(userID)
+	if err != nil {
+		return domain.Payment{}, err
+	}
+
+	if user.ID != userID {
+		return domain.Payment{}, errors.New(constant.ERROR_ROLE_ACCESS)
 	}
 
 	cfg, err := config.LoadConfig()
@@ -85,6 +103,11 @@ func (pcu *paymentCommandUsecase) UpdatePaymentStatus(installmentID, status stri
 		return errors.New("payment not found")
 	}
 
+	if payment.InstallmentID != installmentID {
+		return errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+
+
 	switch status {
 	case "settlement":
 		payment.Status = "success"
@@ -108,7 +131,6 @@ func (pcu *paymentCommandUsecase) UpdatePaymentStatus(installmentID, status stri
 		if err != nil {
 			return errors.New("failed to update installment status")
 		}
-
 
 		err = pcu.paymentCommandRepository.UpdateLoanStatus(payment.InstallmentID)
 		if err != nil {
