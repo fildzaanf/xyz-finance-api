@@ -8,5 +8,5 @@ type TransactionCommandRepositoryInterface interface {
 
 type TransactionQueryRepositoryInterface interface {
 	GetAllTransactions(userID string) ([]domain.Transaction, error)
-	GetTransactionByID(id string) (domain.Transaction, error)
+	GetTransactionByID(transactionID, userID string) (domain.Transaction, error)
 }

@@ -8,6 +8,6 @@ type PaymentCommandUsecaseInterface interface {
 }
 
 type PaymentQueryUsecaseInterface interface {
-	// GetAllPayments(userID string) ([]domain.Payment, error)
-	// GetPaymentByID(id string) (domain.Payment, error)
+	GetAllPayments(userID string) ([]domain.Payment, error)
+	GetPaymentByID(id string, userID string) (domain.Payment, error)
 }

@@ -9,7 +9,7 @@ type PaymentCommandRepositoryInterface interface {
 }
 
 type PaymentQueryRepositoryInterface interface {
-	// GetAllPayments(transactionID string) ([]domain.Payment, error)
-	// GetPaymentByID(id string) (domain.Payment, error)
+	GetAllPayments(userID string) ([]domain.Payment, error)
+	GetPaymentByID(id string, userID string) (domain.Payment, error)
 	GetPaymentByInstallmentID(installmentID string) (domain.Payment, error)
 }

@@ -4,7 +4,6 @@ import (
 	"net/http"
 	"xyz-finance-api/internal/installment/dto"
 	"xyz-finance-api/internal/installment/usecase"
-	"xyz-finance-api/internal/installment/domain"
 	"xyz-finance-api/pkg/constant"
 	"xyz-finance-api/pkg/middleware"
 	"xyz-finance-api/pkg/response"
@@ -26,6 +25,15 @@ func NewInstallmentHandler(icu usecase.InstallmentCommandUsecaseInterface, iqu u
 
 // command
 func (ih *installmentHandler) CreateInstallment(c echo.Context) error {
+	tokenUserID, role, errExtract := middleware.ExtractToken(c)
+	if errExtract != nil {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
+	}
+
+	if role != constant.USER {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
+	}
+
 	var installmentRequest dto.InstallmentRequest
 
 	if err := c.Bind(&installmentRequest); err != nil {
@@ -34,7 +42,7 @@ func (ih *installmentHandler) CreateInstallment(c echo.Context) error {
 
 	installmentDomain := dto.InstallmentRequestToInstallmentDomain(installmentRequest)
 
-	createdInstallment, err := ih.installmentCommandUsecase.CreateInstallment(installmentDomain)
+	createdInstallment, err := ih.installmentCommandUsecase.CreateInstallment(installmentDomain, tokenUserID)
 	if err != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
 	}
@@ -44,6 +52,15 @@ func (ih *installmentHandler) CreateInstallment(c echo.Context) error {
 }
 
 func (ih *installmentHandler) UpdateInstallmentStatusByID(c echo.Context) error {
+	tokenUserID, role, errExtract := middleware.ExtractToken(c)
+	if errExtract != nil {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
+	}
+
+	if role != constant.USER {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
+	}
+
 	installmentID := c.Param("id")
 	if installmentID == "" {
 		return c.JSON(http.StatusBadRequest, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
@@ -56,7 +73,7 @@ func (ih *installmentHandler) UpdateInstallmentStatusByID(c echo.Context) error 
 
 	installment := dto.InstallmentUpdateRequestToInstallmentDomain(installmentUpdate)
 
-	_, errUpdate := ih.installmentCommandUsecase.UpdateInstallmentStatusByID(installmentID, installment)
+	_, errUpdate := ih.installmentCommandUsecase.UpdateInstallmentStatusByID(installmentID, installment, tokenUserID)
 	if errUpdate != nil {
 		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(errUpdate.Error()))
 	}
@@ -64,7 +81,29 @@ func (ih *installmentHandler) UpdateInstallmentStatusByID(c echo.Context) error 
 	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_UPDATED, nil))
 }
 
-// query
+func (ih *installmentHandler) GetInstallmentByID(c echo.Context) error {
+	installmentID := c.Param("id")
+	if installmentID == "" {
+		return c.JSON(http.StatusBadRequest, response.ErrorResponse(constant.ERROR_ID_INVALID))
+	}
+
+	tokenUserID, role, errExtract := middleware.ExtractToken(c)
+	if errExtract != nil {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(errExtract.Error()))
+	}
+
+	if role != constant.USER {
+		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
+	}
+
+	installment, err := ih.installmentQueryUsecase.GetInstallmentByID(installmentID, tokenUserID)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, response.ErrorResponse(err.Error()))
+	}
+
+	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, installment))
+}
+
 func (ih *installmentHandler) GetAllInstallments(c echo.Context) error {
 	tokenUserID, role, errExtract := middleware.ExtractToken(c)
 	if errExtract != nil {
@@ -75,46 +114,10 @@ func (ih *installmentHandler) GetAllInstallments(c echo.Context) error {
 		return c.JSON(http.StatusUnauthorized, response.ErrorResponse(constant.ERROR_ROLE_ACCESS))
 	}
 
-	transactionID := c.QueryParam("transaction_id")
-
-	var installments []domain.Installment
-	var err error
-	if transactionID != "" {
-		installments, err = ih.installmentQueryUsecase.GetAllInstallments(tokenUserID, transactionID)
-	} else {
-		installments, err = ih.installmentQueryUsecase.GetAllInstallments(tokenUserID, "")
-	}
-
+	installments, err := ih.installmentQueryUsecase.GetAllInstallments(tokenUserID)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
+		return c.JSON(http.StatusNotFound, response.ErrorResponse(err.Error()))
 	}
 
 	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, installments))
-}
-
-
-
-func (ih *installmentHandler) GetInstallmentByID(c echo.Context) error {
-	installmentID := c.Param("id")
-	if installmentID == "" {
-		return c.JSON(http.StatusBadRequest, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
-	}
-
-	installment, err := ih.installmentQueryUsecase.GetInstallmentByID(installmentID)
-	if err != nil {
-		return c.JSON(http.StatusNotFound, response.ErrorResponse(constant.ERROR_ID_NOTFOUND))
-	}
-
-	return c.JSON(http.StatusOK, response.SuccessResponse(constant.SUCCESS_RETRIEVED, installment))
-}
-
-func (ih *installmentHandler) GetInstallmentByTransactionID(c echo.Context) error {
-    transactionID := c.Param("transactionID")
-
-    installments, err := ih.installmentQueryUsecase.GetInstallmentByTransactionID(transactionID)
-    if err != nil {
-        return c.JSON(http.StatusInternalServerError, response.ErrorResponse(err.Error()))
-    }
-
-    return c.JSON(http.StatusOK, response.SuccessResponse("Installments retrieved successfully", installments))
 }

@@ -43,6 +43,11 @@ func (tcs *transactionCommandUsecase) CreateTransaction(transaction domain.Trans
 		return domain.Transaction{}, errors.New(constant.ERROR_ROLE_ACCESS)
 	}
 
+
+	if loan.ID != transaction.LoanID {
+		return domain.Transaction{}, errors.New(constant.ERROR_ID_NOTFOUND)
+	}
+
 	if loan.Status == "invalid" {
 		return domain.Transaction{}, errors.New("loan has already been taken")
 	}
