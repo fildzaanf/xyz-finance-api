@@ -18,17 +18,38 @@ func NewLoanCommandRepository(db *gorm.DB) LoanCommandRepositoryInterface {
 		db: db,
 	}
 }
-
 func (lcr *loanCommandRepository) CreateLoan(loan domain.Loan) (domain.Loan, error) {
+	tx := lcr.db.Begin() 
+	if err := tx.Error; err != nil {
+		return domain.Loan{}, err
+	}
+
+	var existingLoan domain.Loan
+	err := tx.Raw("SELECT * FROM loans WHERE user_id = ? AND status = 'active' FOR UPDATE", loan.UserID).
+		Scan(&existingLoan).Error
+	if err != nil && err != gorm.ErrRecordNotFound {
+		tx.Rollback()
+		return domain.Loan{}, err
+	}
+
+	if existingLoan.ID != "" { 
+		tx.Rollback()
+		return domain.Loan{}, errors.New("user already has an active loan")
+	}
+
 	loanEntity := domain.LoanDomainToLoanEntity(loan)
 
-	result := lcr.db.Create(&loanEntity)
+	result := tx.Create(&loanEntity)
 	if result.Error != nil {
+		tx.Rollback()
 		return domain.Loan{}, result.Error
 	}
 
-	loanDomain := domain.LoanEntityToLoanDomain(loanEntity)
+	if err := tx.Commit().Error; err != nil {
+		return domain.Loan{}, err
+	}
 
+	loanDomain := domain.LoanEntityToLoanDomain(loanEntity)
 	return loanDomain, nil
 }
 
@@ -42,7 +63,6 @@ func (lcr *loanCommandRepository) UpdateLoanStatusByID(id string, loan domain.Lo
 		}
 		return domain.Loan{}, err
 	}
-
 
 	loan.UpdatedAt = time.Now()
 	result := lcr.db.Model(&domain.Loan{}).Where("id = ?", id).
