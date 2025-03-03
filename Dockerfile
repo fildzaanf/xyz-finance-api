@@ -1,4 +1,4 @@
-FROM golang:1.21-alpine AS builder
+FROM golang:1.23-alpine AS builder
 
 ENV CGO_ENABLED=0 \
     GOOS=linux \
@@ -22,6 +22,6 @@ RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/main .
 
-EXPOSE 8000
+EXPOSE 8080
 
 CMD ["./main"]
