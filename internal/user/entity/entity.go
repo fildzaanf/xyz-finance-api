@@ -43,6 +43,3 @@ func (u *User) BeforeCreate(tx *gorm.DB) (err error) {
 	return nil
 }
 
-/*
-CREATE TYPE role AS ENUM ('user');
-*/
