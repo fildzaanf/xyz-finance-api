@@ -11,7 +11,6 @@ type User struct {
 	Email           string
 	Password        string
 	ConfirmPassword string
-	NewPassword     string
 	Nik             string
 	FullName        string
 	LegalName       string
@@ -28,20 +27,20 @@ type User struct {
 // mapper
 func UserDomainToUserEntity(userDomain User) entity.User {
 	return entity.User{
-		ID:          userDomain.ID,
-		Email:       userDomain.Email,
-		Password:    userDomain.Password,
-		Nik:         userDomain.Nik,
-		FullName:    userDomain.FullName,
-		LegalName:   userDomain.LegalName,
-		BirthPlace:  userDomain.BirthPlace,
-		BirthDate:   userDomain.BirthDate,
-		KtpPhoto:    userDomain.KtpPhoto,
-		SelfiePhoto: userDomain.SelfiePhoto,
-		Salary:      userDomain.Salary,
-		Role:        userDomain.Role,
-		CreatedAt:   userDomain.CreatedAt,
-		UpdatedAt:   userDomain.UpdatedAt,
+		ID:              userDomain.ID,
+		Email:           userDomain.Email,
+		Password:        userDomain.Password,
+		Nik:             userDomain.Nik,
+		FullName:        userDomain.FullName,
+		LegalName:       userDomain.LegalName,
+		BirthPlace:      userDomain.BirthPlace,
+		BirthDate:       userDomain.BirthDate,
+		KtpPhoto:        userDomain.KtpPhoto,
+		SelfiePhoto:     userDomain.SelfiePhoto,
+		Salary:          userDomain.Salary,
+		Role:            userDomain.Role,
+		CreatedAt:       userDomain.CreatedAt,
+		UpdatedAt:       userDomain.UpdatedAt,
 	}
 }
 

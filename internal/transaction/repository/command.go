@@ -17,14 +17,25 @@ func NewTransactionCommandRepository(db *gorm.DB) TransactionCommandRepositoryIn
 }
 
 func (tcr *transactionCommandRepository) CreateTransaction(transaction domain.Transaction) (domain.Transaction, error) {
-	transactionEntity := domain.TransactionDomainToTransactionEntity(transaction)
+    transactionEntity := domain.TransactionDomainToTransactionEntity(transaction)
 
-	result := tcr.db.Create(&transactionEntity)
-	if result.Error != nil {
-		return domain.Transaction{}, result.Error
-	}
+    tx := tcr.db.Begin()
 
-	transactionDomain := domain.TransactionEntityToTransactionDomain(transactionEntity)
+    if err := tx.Error; err != nil {
+        return domain.Transaction{}, err
+    }
 
-	return transactionDomain, nil
+    result := tx.Create(&transactionEntity)
+    if result.Error != nil {
+        tx.Rollback() 
+        return domain.Transaction{}, result.Error
+    }
+
+    if err := tx.Commit().Error; err != nil {
+        return domain.Transaction{}, err
+    }
+
+    transactionDomain := domain.TransactionEntityToTransactionDomain(transactionEntity)
+    return transactionDomain, nil
 }
+
