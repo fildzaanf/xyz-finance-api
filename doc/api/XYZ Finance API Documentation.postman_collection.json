@@ -96,7 +96,7 @@
 									"formdata": [
 										{
 											"key": "email",
-											"value": "fildza@example.com",
+											"value": "fildzaa@example.com",
 											"type": "text"
 										},
 										{
@@ -111,7 +111,7 @@
 										},
 										{
 											"key": "nik",
-											"value": "32101234567890125",
+											"value": "32191234577870128",
 											"type": "text"
 										},
 										{
@@ -142,19 +142,19 @@
 										{
 											"key": "ktp_photo",
 											"type": "file",
-											"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+											"src": "/Users/user/Downloads/id-11134207-7qul6-ljp0f1bqdri789.jpeg"
 										},
 										{
 											"key": "selfie_photo",
 											"type": "file",
-											"src": "/Users/user/Downloads/1_A7367570001139_20240627145635280_base.jpg"
+											"src": "/Users/user/Downloads/id-11134207-7qul6-ljp0f1bqdri789.jpeg"
 										}
 									]
 								},
 								"url": {
-									"raw": "{{local}}/users/register",
+									"raw": "{{url}}/users/register",
 									"host": [
-										"{{local}}"
+										"{{url}}"
 									],
 									"path": [
 										"users",
@@ -176,7 +176,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 26 Feb 2025 00:40:25 GMT"
+									"value": "Mon, 03 Mar 2025 00:31:59 GMT"
 								},
 								{
 									"key": "Content-Length",
@@ -184,7 +184,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"register successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\"\n    }\n}"
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"register successfully\"\n    },\n    \"results\": {\n        \"id\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\"\n    }\n}"
 						}
 					]
 				},
@@ -221,7 +221,7 @@
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "\n{\n  \"email\": \"fildza@example.com\",\n  \"password\": \"securepassword123\"\n}\n\n\n",
+									"raw": "\n{\n  \"email\": \"fildzaa@example.com\",\n  \"password\": \"securepassword123\"\n}\n\n\n",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -229,9 +229,9 @@
 									}
 								},
 								"url": {
-									"raw": "{{local}}/users/login",
+									"raw": "{{url}}/users/login",
 									"host": [
-										"{{local}}"
+										"{{url}}"
 									],
 									"path": [
 										"users",
@@ -253,7 +253,7 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 26 Feb 2025 00:40:34 GMT"
+									"value": "Mon, 03 Mar 2025 00:33:55 GMT"
 								},
 								{
 									"key": "Content-Length",
@@ -261,7 +261,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"logged in successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDA2MTY4MzQsImlkIjoiMTY3YjkzMTQtODE1NS00MjI1LWFkMmEtMzc0YzA5YzA0MDMxIiwicm9sZSI6InVzZXIifQ.eyhouQrHD0vwwaWPrsk7aNB4Wzt6RxjWi-hlP7Oeix0\"\n    }\n}"
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"logged in successfully\"\n    },\n    \"results\": {\n        \"id\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n        \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDEwNDg0MzUsImlkIjoiMzNlYjcyNjMtOTFhOS00ZDZjLWE4YTItNDY4OTIyZDc2MjY4Iiwicm9sZSI6InVzZXIifQ.FnaMEJGAky4p8ZlcG2t7JmYSNteoFBk2l1YgFj1k_uc\"\n    }\n}"
 						}
 					]
 				},
@@ -304,9 +304,9 @@
 								"method": "GET",
 								"header": [],
 								"url": {
-									"raw": "{{local}}/users/:user_id",
+									"raw": "{{url}}/users/:user_id",
 									"host": [
-										"{{local}}"
+										"{{url}}"
 									],
 									"path": [
 										"users",
@@ -315,7 +315,7 @@
 									"variable": [
 										{
 											"key": "user_id",
-											"value": "167b9314-8155-4225-ad2a-374c09c04031"
+											"value": "33eb7263-91a9-4d6c-a8a2-468922d76268"
 										}
 									]
 								}
@@ -334,15 +334,15 @@
 								},
 								{
 									"key": "Date",
-									"value": "Wed, 26 Feb 2025 00:40:57 GMT"
+									"value": "Mon, 03 Mar 2025 00:34:41 GMT"
 								},
 								{
 									"key": "Content-Length",
-									"value": "485"
+									"value": "487"
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"id\": \"167b9314-8155-4225-ad2a-374c09c04031\",\n        \"nik\": \"32101234567890125\",\n        \"full_name\": \"Hanisah Fildza Annafisah\",\n        \"legal_name\": \"Hanisah Fildza Annafisah\",\n        \"birth_place\": \"Bandung\",\n        \"birth_date\": \"2005-09-10\",\n        \"ktp_photo\": \"https://talkspace-pat.s3.amazonaws.com/8041b61b-a8c9-4e1c-b550-263fcfa0e5fb.jpg\",\n        \"selfie_photo\": \"https://talkspace-pat.s3.amazonaws.com/5dc045e4-ecbb-4e60-9e3c-ff7322463b2f.jpg\",\n        \"salary\": 5000000\n    }\n}"
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"id\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n        \"nik\": \"32191234577870128\",\n        \"full_name\": \"Hanisah Fildza Annafisah\",\n        \"legal_name\": \"Hanisah Fildza Annafisah\",\n        \"birth_place\": \"Bandung\",\n        \"birth_date\": \"2005-09-10\",\n        \"ktp_photo\": \"https://talkspace-pat.s3.amazonaws.com/517d7c28-8873-46f1-b80a-4e2dcfd2b9b7.jpeg\",\n        \"selfie_photo\": \"https://talkspace-pat.s3.amazonaws.com/ff275a11-7d4f-4623-99e7-9cf80adb23cc.jpeg\",\n        \"salary\": 5000000\n    }\n}"
 						}
 					]
 				}
@@ -352,7 +352,123 @@
 			"name": "Loans",
 			"item": [
 				{
-					"name": "Get Loans",
+					"name": "Get Loans by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDA5MzYwNTAsImlkIjoiNDg1YWViOWYtM2E0MC00NmFmLWE0NjQtYzcxYjhlNTU2MjAyIiwicm9sZSI6InVzZXIifQ.ZQXj7g3wIRDQfO5ykYfrdIsqz1XkrziyRc232ObD_m0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/loans/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"loans",
+								":id"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Loans by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/loans/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"loans",
+										":id"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "fb7271df-5030-42d2-95e9-260b27612a4d"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:37:24 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "307"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"ID\": \"fb7271df-5030-42d2-95e9-260b27612a4d\",\n        \"UserID\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n        \"Tenor\": 1,\n        \"LimitAmount\": 5000000,\n        \"Status\": \"valid\",\n        \"CreatedAt\": \"2025-03-03T07:35:37.227+07:00\",\n        \"UpdatedAt\": \"2025-03-03T07:35:37.227+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Loans",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
@@ -369,23 +485,122 @@
 							}
 						},
 						"url": {
-							"raw": "{{local}}/loans/:user_id",
+							"raw": "{{local}}/loans",
 							"host": [
 								"{{local}}"
 							],
 							"path": [
-								"loans",
-								":user_id"
-							],
-							"variable": [
-								{
-									"key": "user_id",
-									"value": ""
-								}
+								"loans"
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Get Loans Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/loans",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"loans"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:36:21 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "1003"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": [\n        {\n            \"ID\": \"442b5f54-fc7d-4d39-9e2b-6d2cc8e8a462\",\n            \"UserID\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n            \"Tenor\": 6,\n            \"LimitAmount\": 10000000,\n            \"Status\": \"valid\",\n            \"CreatedAt\": \"2025-03-03T07:36:14.426+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:36:14.426+07:00\"\n        },\n        {\n            \"ID\": \"4a216550-2ef6-46bd-8011-8313bd15f508\",\n            \"UserID\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n            \"Tenor\": 2,\n            \"LimitAmount\": 6000000,\n            \"Status\": \"valid\",\n            \"CreatedAt\": \"2025-03-03T07:36:07.161+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:36:07.161+07:00\"\n        },\n        {\n            \"ID\": \"73c2910c-48e2-42b1-873b-cf400acfa022\",\n            \"UserID\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n            \"Tenor\": 3,\n            \"LimitAmount\": 7500000,\n            \"Status\": \"valid\",\n            \"CreatedAt\": \"2025-03-03T07:36:10.266+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:36:10.266+07:00\"\n        },\n        {\n            \"ID\": \"fb7271df-5030-42d2-95e9-260b27612a4d\",\n            \"UserID\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n            \"Tenor\": 1,\n            \"LimitAmount\": 5000000,\n            \"Status\": \"valid\",\n            \"CreatedAt\": \"2025-03-03T07:35:37.227+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:35:37.227+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Create Loans",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"tenor\": 6\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/loans",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"loans"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:36:14 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "316"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data created successfully\"\n    },\n    \"results\": {\n        \"id\": \"442b5f54-fc7d-4d39-9e2b-6d2cc8e8a462\",\n        \"user_id\": \"33eb7263-91a9-4d6c-a8a2-468922d76268\",\n        \"tenor\": 6,\n        \"limit_amount\": 10000000,\n        \"status\": \"valid\",\n        \"created_at\": \"2025-03-03T07:36:14.425571+07:00\",\n        \"updated_at\": \"2025-03-03T07:36:14.425571+07:00\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
@@ -416,15 +631,212 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Transaction",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"loan_id\":\"4a216550-2ef6-46bd-8011-8313bd15f508\",\n  \"asset_name\": \"iPhone 16\",\n  \"otr_price\": 5000000\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/transactions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:39:44 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "355"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"Transaction created successfully\"\n    },\n    \"results\": {\n        \"id\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n        \"loan_id\": \"4a216550-2ef6-46bd-8011-8313bd15f508\",\n        \"asset_name\": \"iPhone 16\",\n        \"total_amount\": 5093333,\n        \"tenor\": 2,\n        \"otr_price\": 5000000,\n        \"admin_fee\": 10000,\n        \"interest\": 83333,\n        \"status\": \"success\",\n        \"created_at\": \"2025-03-03T07:39:44.07406+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Transactions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/transactions",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"transactions"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Transactions",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/transactions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"transactions"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:39:47 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "607"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": [\n        {\n            \"ID\": \"2eca0f0e-58b0-4985-9a7d-ee26730cdd83\",\n            \"LoanID\": \"fb7271df-5030-42d2-95e9-260b27612a4d\",\n            \"AssetName\": \"MacBook Pro M2\",\n            \"TotalAmount\": 5051666,\n            \"Tenor\": 1,\n            \"OTRPrice\": 5000000,\n            \"AdminFee\": 10000,\n            \"Interest\": 41666,\n            \"Status\": \"success\",\n            \"CreatedAt\": \"2025-03-03T07:38:20+07:00\"\n        },\n        {\n            \"ID\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n            \"LoanID\": \"4a216550-2ef6-46bd-8011-8313bd15f508\",\n            \"AssetName\": \"iPhone 16\",\n            \"TotalAmount\": 5093333,\n            \"Tenor\": 2,\n            \"OTRPrice\": 5000000,\n            \"AdminFee\": 10000,\n            \"Interest\": 83333,\n            \"Status\": \"success\",\n            \"CreatedAt\": \"2025-03-03T07:39:44+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Transaction by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/transactions/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"transactions",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Transaction by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/transactions/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"transactions",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2eca0f0e-58b0-4985-9a7d-ee26730cdd83"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:40:53 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "343"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"ID\": \"2eca0f0e-58b0-4985-9a7d-ee26730cdd83\",\n        \"LoanID\": \"fb7271df-5030-42d2-95e9-260b27612a4d\",\n        \"AssetName\": \"MacBook Pro M2\",\n        \"TotalAmount\": 5051666,\n        \"Tenor\": 1,\n        \"OTRPrice\": 5000000,\n        \"AdminFee\": 10000,\n        \"Interest\": 41666,\n        \"Status\": \"success\",\n        \"CreatedAt\": \"2025-03-03T07:38:20+07:00\"\n    }\n}"
+						}
+					]
 				}
 			]
 		},
 		{
-			"name": "Payments",
+			"name": "Intsallments",
 			"item": [
 				{
-					"name": "Create Payments",
+					"name": "Create Installments",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -447,7 +859,442 @@
 							]
 						}
 					},
-					"response": []
+					"response": [
+						{
+							"name": "Create Payments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"transaction_id\": \"d21d8112-67b5-442a-98e5-50f91c48935c\"\n}\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/installments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"installments"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:42:30 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "674"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data created successfully\"\n    },\n    \"results\": [\n        {\n            \"id\": \"10d26680-7c54-429a-9b97-3bde6f6dd163\",\n            \"transaction_id\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n            \"installment_number\": 1,\n            \"amount\": 2546666,\n            \"due_date\": \"2025-04-03T07:42:30.650355+07:00\",\n            \"status\": \"unpaid\",\n            \"created_at\": \"2025-03-03T07:42:30.650355+07:00\",\n            \"updated_at\": \"2025-03-03T07:42:30.651+07:00\"\n        },\n        {\n            \"id\": \"ef5c014e-93e7-4781-9352-abe2475677ce\",\n            \"transaction_id\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n            \"installment_number\": 2,\n            \"amount\": 2546666,\n            \"due_date\": \"2025-05-03T07:42:30.655871+07:00\",\n            \"status\": \"unpaid\",\n            \"created_at\": \"2025-03-03T07:42:30.655871+07:00\",\n            \"updated_at\": \"2025-03-03T07:42:30.656+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Installments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/installments",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"installments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Installments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/installments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"installments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:44:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "940"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": [\n        {\n            \"ID\": \"10d26680-7c54-429a-9b97-3bde6f6dd163\",\n            \"TransactionID\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n            \"InstallmentNumber\": 1,\n            \"Amount\": 2546666,\n            \"DueDate\": \"2025-04-03T07:42:30.65+07:00\",\n            \"Status\": \"unpaid\",\n            \"CreatedAt\": \"2025-03-03T07:42:30.65+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:42:30.651+07:00\"\n        },\n        {\n            \"ID\": \"ef5c014e-93e7-4781-9352-abe2475677ce\",\n            \"TransactionID\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n            \"InstallmentNumber\": 2,\n            \"Amount\": 2546666,\n            \"DueDate\": \"2025-05-03T07:42:30.656+07:00\",\n            \"Status\": \"unpaid\",\n            \"CreatedAt\": \"2025-03-03T07:42:30.656+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:42:30.656+07:00\"\n        },\n        {\n            \"ID\": \"79f15d79-989c-4c34-8d3c-7baeb54bf946\",\n            \"TransactionID\": \"2eca0f0e-58b0-4985-9a7d-ee26730cdd83\",\n            \"InstallmentNumber\": 1,\n            \"Amount\": 5051666,\n            \"DueDate\": \"2025-04-03T07:41:34.714+07:00\",\n            \"Status\": \"unpaid\",\n            \"CreatedAt\": \"2025-03-03T07:41:34.714+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:41:34.716+07:00\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Installment by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/installments/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"installments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Installment by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/installments/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"installments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "10d26680-7c54-429a-9b97-3bde6f6dd163"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:45:06 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "362"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"ID\": \"10d26680-7c54-429a-9b97-3bde6f6dd163\",\n        \"TransactionID\": \"d21d8112-67b5-442a-98e5-50f91c48935c\",\n        \"InstallmentNumber\": 1,\n        \"Amount\": 2546666,\n        \"DueDate\": \"2025-04-03T07:42:30.65+07:00\",\n        \"Status\": \"unpaid\",\n        \"CreatedAt\": \"2025-03-03T07:42:30.65+07:00\",\n        \"UpdatedAt\": \"2025-03-03T07:42:30.651+07:00\"\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Payments",
+			"item": [
+				{
+					"name": "Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE3NDA4NDIyNDEsImlkIjoiMzkzYmQ3YWYtNzRjNy00NTk2LWE4ODAtYWE4NTk1N2YxYjBhIiwicm9sZSI6InVzZXIifQ.eTYdopDtLtgqrHlt7HFJd10ShDhW8LyfpjetB19UQxs",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"installment_id\": \"e7f82465-1055-46d4-b65e-8d22254264d4\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{local}}/payments",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payment",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"installment_id\": \"79f15d79-989c-4c34-8d3c-7baeb54bf946\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:47:22 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "467"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data created successfully\"\n    },\n    \"results\": {\n        \"id\": \"2c97166b-012a-4a0d-b52d-13fc234b5e4b\",\n        \"installment_id\": \"79f15d79-989c-4c34-8d3c-7baeb54bf946\",\n        \"gross_amount\": 5051666,\n        \"status\": \"pending\",\n        \"payment_url\": \"https://app.sandbox.midtrans.com/snap/v4/redirection/4405403e-80eb-4309-881c-0a289d7fd1fb\",\n        \"token\": \"4405403e-80eb-4309-881c-0a289d7fd1fb\",\n        \"created_at\": \"2025-03-03T07:47:22.270044+07:00\",\n        \"updated_at\": \"2025-03-03T07:47:22.270045+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get Payment by ID",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/payments/:id",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get Payment by ID",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/payments/:id",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "2c97166b-012a-4a0d-b52d-13fc234b5e4b"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:49:16 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "457"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": {\n        \"ID\": \"2c97166b-012a-4a0d-b52d-13fc234b5e4b\",\n        \"InstallmentID\": \"79f15d79-989c-4c34-8d3c-7baeb54bf946\",\n        \"GrossAmount\": 5051666,\n        \"Status\": \"success\",\n        \"PaymentURL\": \"https://app.sandbox.midtrans.com/snap/v4/redirection/4405403e-80eb-4309-881c-0a289d7fd1fb\",\n        \"Token\": \"4405403e-80eb-4309-881c-0a289d7fd1fb\",\n        \"CreatedAt\": \"2025-03-03T07:47:22.27+07:00\",\n        \"UpdatedAt\": \"2025-03-03T07:48:22.776+07:00\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Payments",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{local}}/payments",
+							"host": [
+								"{{local}}"
+							],
+							"path": [
+								"payments"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get All Payments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/payments",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"payments"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Vary",
+									"value": "Origin"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 03 Mar 2025 00:48:26 GMT"
+								},
+								{
+									"key": "Content-Length",
+									"value": "841"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"meta\": {\n        \"success\": true,\n        \"message\": \"data retrieved successfully\"\n    },\n    \"results\": [\n        {\n            \"ID\": \"2998e88e-9a9c-454c-bd5a-a566cdccf309\",\n            \"InstallmentID\": \"10d26680-7c54-429a-9b97-3bde6f6dd163\",\n            \"GrossAmount\": 2546666,\n            \"Status\": \"pending\",\n            \"PaymentURL\": \"https://app.sandbox.midtrans.com/snap/v4/redirection/6ddbb3ee-2502-4851-a79f-049d0eaa0778\",\n            \"Token\": \"6ddbb3ee-2502-4851-a79f-049d0eaa0778\",\n            \"CreatedAt\": \"2025-03-03T07:45:49.755+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:45:49.755+07:00\"\n        },\n        {\n            \"ID\": \"2c97166b-012a-4a0d-b52d-13fc234b5e4b\",\n            \"InstallmentID\": \"79f15d79-989c-4c34-8d3c-7baeb54bf946\",\n            \"GrossAmount\": 5051666,\n            \"Status\": \"success\",\n            \"PaymentURL\": \"https://app.sandbox.midtrans.com/snap/v4/redirection/4405403e-80eb-4309-881c-0a289d7fd1fb\",\n            \"Token\": \"4405403e-80eb-4309-881c-0a289d7fd1fb\",\n            \"CreatedAt\": \"2025-03-03T07:47:22.27+07:00\",\n            \"UpdatedAt\": \"2025-03-03T07:48:22.776+07:00\"\n        }\n    ]\n}"
+						}
+					]
 				}
 			]
 		}

@@ -11,7 +11,7 @@ type Payment struct {
 	ID            string    `gorm:"type:varchar(36);primaryKey"`
 	InstallmentID string    `gorm:"type:varchar(36);not null"`
 	GrossAmount   int       `gorm:"not null"`
-	Status        string    `gorm:"type:enum('pending', 'success', 'failed', 'expired');default:'pending'"`
+	Status        string    `gorm:"type:enum('deny', 'success', 'cancel', 'expire', 'pending');default:'pending'"`
 	PaymentURL    string    `gorm:"type:text"`
 	Token         string    `gorm:"type:text"`
 	CreatedAt     time.Time 
