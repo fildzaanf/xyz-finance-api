@@ -1,4 +1,22 @@
-# xyz-finance-api
+# XPay : Finance Solutions
+
+## 📝 Project Overview
+XPay is a digital financing platform for electronics, vehicles, and household appliances, enabling users to apply for loans, make transactions, and manage installment payments
+
+## 🎯 Problem Statement & Solution
+
+#### Problem Statement
+Many users face challenges in managing purchases of electronics, vehicles, and household appliances due to limited access to flexible financing options, difficulty tracking installment payments, and the complexity of managing multiple transactions manually. These issues can lead to missed payments, financial confusion, and reduced access to essential goods.
+
+#### Solution
+XPay provides a digital financing platform that simplifies loan applications, transaction management, and installment tracking. The platform allows users to:
+
+- Apply for loans quickly for electronics, vehicles, and household appliances
+- Create and track financial transactions in real time
+- Manage installment payments efficiently with clear status tracking
+- Integrate with payment gateways (e.g., Midtrans) for secure and automated payments
+
+By centralizing all financial activities in a single, user-friendly platform, XPay helps users access financing easily, maintain accurate payment records, and improve financial management.
 
 ## 🚀 Tools and Technologies
 
