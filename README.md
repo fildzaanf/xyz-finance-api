@@ -40,6 +40,7 @@ By centralizing all financial activities in a single, user-friendly platform, XP
 * Command Query Responsibility Segregation (CQRS)
 * Microservices Architecture
 * REST API
+* Webhook
 
 ## ✨ Features
 
